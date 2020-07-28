@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Schedule Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Orange County GTFS Feed QA/QC</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="schedule_analysis.html">Routes and Schedule Analysis</a>
+</li>
+<li>
+  <a href="validation.html">Feed Validation</a>
+</li>
+<li>
+  <a href="frequency_analysis.html">Frequency Analysis</a>
+</li>
+<li>
+  <a href="service_speed_analysis.html">Service Speed Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Schedule Analysis</h1>
+
+</div>
+
+
+<p>The tables and charts presented on this page provide a look at the scheduling information contained in each GTFS feed. These tables are intended to assist an analysis in understanding service patterns to ensure that they are accurate. This information is also helpful in ensuring that overlapping schedules are not computed, resulting in duplicate service findings.</p>
+<div id="chapel-hill-transit-gtfs-feed" class="section level2">
+<h2>Chapel Hill Transit GTFS Feed</h2>
+<div id="agency-information" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+agency_id
+</th>
+<th style="text-align:left;">
+agency_url
+</th>
+<th style="text-align:left;">
+agency_lang
+</th>
+<th style="text-align:left;">
+agency_name
+</th>
+<th style="text-align:left;">
+agency_phone
+</th>
+<th style="text-align:left;">
+agency_timezone
+</th>
+<th style="text-align:left;">
+agency_fare_url
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+243
+</td>
+<td style="text-align:left;">
+<a href="http://www.chtransit.org" class="uri">http://www.chtransit.org</a>
+</td>
+<td style="text-align:left;">
+en
+</td>
+<td style="text-align:left;">
+Chapel Hill Transit
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 13-Sep-2019 20:50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+chapel-hill-transit-nc-us@trilliumtransit.com" class="email">support+chapel-hill-transit-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190913
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+chapel-hill-transit-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map" class="section level3">
+<h3>System Map</h3>
+<p><img src="K:/Projects/OrangeCoNC/Features/R/orange-county-gtfs-reviewchapel_hill_transit_gtfs_20190914_routes.png" /></p>
+</div>
+<div id="route-table" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JN - Saturday
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NS
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride J
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride G
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride T
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FG - Saturday
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCX
+</td>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D - Saturday
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RU
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JFX
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T - Saturday
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HS
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NU
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HU
+</td>
+<td style="text-align:left;">
+UNC Hospitals-Botanical Garden-54 Park and Ride-Hendrick Building
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CM
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CPX
+</td>
+<td style="text-align:left;">
+Carrboro Plaza Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CW
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CCX
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CL
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V - Saturday
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:left;">
+New route connecting Southern Village and Meadowmont to main campus and UNC Hospitals on Saturdays.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="calendar-attributes" class="section level3">
+<h3>Calendar Attributes</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_930_b_21795_d_96
+</td>
+<td style="text-align:left;">
+U &amp; NU WKND (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_929_b_21727_d_56
+</td>
+<td style="text-align:left;">
+SAFE RIDES (ThFSa)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_96
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_31
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21731_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21730_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15981_b_17467_d_31
+</td>
+<td style="text-align:left;">
+HALLOWEEN (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="chapel-hill-transit-gtfs-feed-1" class="section level2">
+<h2>Chapel Hill Transit GTFS Feed</h2>
+<div id="agency-information-1" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+agency_id
+</th>
+<th style="text-align:left;">
+agency_url
+</th>
+<th style="text-align:left;">
+agency_lang
+</th>
+<th style="text-align:left;">
+agency_name
+</th>
+<th style="text-align:left;">
+agency_phone
+</th>
+<th style="text-align:left;">
+agency_timezone
+</th>
+<th style="text-align:left;">
+agency_fare_url
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+243
+</td>
+<td style="text-align:left;">
+<a href="http://www.chtransit.org" class="uri">http://www.chtransit.org</a>
+</td>
+<td style="text-align:left;">
+en
+</td>
+<td style="text-align:left;">
+Chapel Hill Transit
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information-1" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 13-Sep-2019 20:50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+chapel-hill-transit-nc-us@trilliumtransit.com" class="email">support+chapel-hill-transit-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190913
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+chapel-hill-transit-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-1" class="section level3">
+<h3>System Map</h3>
+<p><img src="K:/Projects/OrangeCoNC/Features/R/orange-county-gtfs-reviewchapel_hill_transit_gtfs_20190914_routes.png" /></p>
+</div>
+<div id="route-table-1" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JN - Saturday
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NS
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride J
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride G
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride T
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FG - Saturday
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCX
+</td>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D - Saturday
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RU
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JFX
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T - Saturday
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HS
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NU
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HU
+</td>
+<td style="text-align:left;">
+UNC Hospitals-Botanical Garden-54 Park and Ride-Hendrick Building
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CM
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CPX
+</td>
+<td style="text-align:left;">
+Carrboro Plaza Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CW
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CCX
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CL
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V - Saturday
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:left;">
+New route connecting Southern Village and Meadowmont to main campus and UNC Hospitals on Saturdays.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-1" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-2.png" width="672" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="calendar-attributes-1" class="section level3">
+<h3>Calendar Attributes</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_930_b_21795_d_96
+</td>
+<td style="text-align:left;">
+U &amp; NU WKND (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_929_b_21727_d_56
+</td>
+<td style="text-align:left;">
+SAFE RIDES (ThFSa)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_96
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_31
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21731_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21730_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15981_b_17467_d_31
+</td>
+<td style="text-align:left;">
+HALLOWEEN (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

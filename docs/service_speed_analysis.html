@@ -1,0 +1,9197 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Service Speed Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Orange County GTFS Feed QA/QC</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="schedule_analysis.html">Routes and Schedule Analysis</a>
+</li>
+<li>
+  <a href="validation.html">Feed Validation</a>
+</li>
+<li>
+  <a href="frequency_analysis.html">Frequency Analysis</a>
+</li>
+<li>
+  <a href="service_speed_analysis.html">Service Speed Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Service Speed Analysis</h1>
+
+</div>
+
+
+<p>The service speed analysis findings reported on this page report unusually high and low transit speeds between stop-to-stop pairs. Transit times are calculated based on all stop-to-stop pairs in the schedule. Distance is computed based on straight-line distance between stop pairs Therefore, speeds reported here can be viewed as the minimum speed necessary to complete the segment. The purose of these tests is to identify potentially unrealistic scheduling times that would impact a transit analysis.</p>
+<div id="chapel-hill-transit-gtfs-feed" class="section level2">
+<h2>Chapel Hill Transit GTFS Feed</h2>
+<div id="high-and-low-speed-links" class="section level3">
+<h3>High and Low Speed Links</h3>
+<p><img src="K:/Projects/OrangeCoNC/Features/R/orange-county-gtfs-reviewchapel_hill_transit_gtfs_20190914_high_low_speed.png" /></p>
+</div>
+<div id="miles-per-route-of-segments-with-60mph-speed" class="section level3">
+<h3>Miles per Route of Segments with &gt;60mph Speed</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+miles_over_60
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+7.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+6.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+4.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+2.99
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+2.42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+2.35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+2.34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+2.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+2.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+1.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+1.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+1.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+1.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+1.29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+0.89
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+0.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:right;">
+0.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+0.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UNC Hospitals-Botanical Garden-54 Park and Ride-Hendrick Building
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="miles-per-route-of-segments-with-5mph-speed" class="section level3">
+<h3>Miles per Route of Segments with &lt;5mph Speed</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+miles_under_5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+1.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+1.24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+0.94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+0.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+0.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+0.80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+0.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+0.61
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro Plaza Express
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-stop-to-stop-segments-with-high-and-low-speeds" class="section level3">
+<h3>All Stop-to-Stop Segments with High and Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Airport Dr at Martin Luther King Jr Blvd (WB)
+</td>
+<td style="text-align:left;">
+Airport Dr at Estes Dr Ext (NB)
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Banks Dr at Weaver Dairy Rd (NB)
+</td>
+<td style="text-align:left;">
+Weaver Dairy Rd at Kingston Rd (Timberlyne Shopping Center)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Barclay Rd at Justice St (WB)
+</td>
+<td style="text-align:left;">
+Barclay Rd at Williams Circle (WB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Barclay Rd at Williams Circle (EB)
+</td>
+<td style="text-align:left;">
+Barclay Rd at Justice St (EB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Barclay Rd at Wyrick St
+</td>
+<td style="text-align:left;">
+Barclay Rd at Hartig St
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bowles Dr at Manning Lot (WB)
+</td>
+<td style="text-align:left;">
+Bowles Dr at Smith Center (WB)
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bowles Dr at Manning Lot (WB)
+</td>
+<td style="text-align:left;">
+Bowles Dr at Smith Center (WB)
+</td>
+<td style="text-align:left;">
+1745
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at 180 West Apts
+</td>
+<td style="text-align:left;">
+Tar Hill Dr at BPW Club Rd
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at Orchard Ln
+</td>
+<td style="text-align:left;">
+BPW Club Rd at Sterling Bluff
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at Tennis Courts
+</td>
+<td style="text-align:left;">
+BPW Club Rd at The Villages
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at Tennis Courts
+</td>
+<td style="text-align:left;">
+BPW Club Rd at The Villages
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at The Villages
+</td>
+<td style="text-align:left;">
+BPW Club Rd at Smith Level Rd
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BPW Club Rd at The Villages
+</td>
+<td style="text-align:left;">
+BPW Club Rd at Smith Level Rd
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brandon Rd at Hamilton Rd (EB)
+</td>
+<td style="text-align:left;">
+Hamilton Rd at Maxwell Rd (SB 1)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brandon Rd at Hamilton Rd (WB)
+</td>
+<td style="text-align:left;">
+Brandon Rd at Hayes Rd (WB)
+</td>
+<td style="text-align:left;">
+1734
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brandon Rd at Hamilton Rd (WB)
+</td>
+<td style="text-align:left;">
+Brandon Rd at Hayes Rd (WB)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cameron Ave at Cameron Glen
+</td>
+<td style="text-align:left;">
+Cameron Ave at Wilson St
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cameron Ave at Merritt Mill Rd
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at Locust Ct
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carol St at James St (west)
+</td>
+<td style="text-align:left;">
+Carol St at James St (east)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carol St at Lisa St
+</td>
+<td style="text-align:left;">
+Carol St at James St (west)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carol Woods
+</td>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carol Woods
+</td>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro High School (NB)
+</td>
+<td style="text-align:left;">
+Tar Hill Dr at Rock Haven Rd (NB)
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carrboro High School (NB)
+</td>
+<td style="text-align:left;">
+Tar Hill Dr at Rock Haven Rd (NB)
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coleridge Dr at Presque Isle Ln
+</td>
+<td style="text-align:left;">
+Coleridge Dr at Sage Rd (Sagebrook Apts)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coleridge Dr at Presque Isle Ln
+</td>
+<td style="text-align:left;">
+Coleridge Dr at Sage Rd (Sagebrook Apts)
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colony Woods Dr at White Plains Rd
+</td>
+<td style="text-align:left;">
+Colony Woods Dr at Overland Dr
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Curtis Rd at S Lakeshore Dr
+</td>
+<td style="text-align:left;">
+Curtis Rd at Lyons Rd
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Davie Rd at Bert St
+</td>
+<td style="text-align:left;">
+Davie Rd at Jones Ferry Rd (BP Station)
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+144
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Davie Rd at Fidelity Ct
+</td>
+<td style="text-align:left;">
+Davie Rd at Bert St
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Davie Rd at Jones Ferry Rd (BP Station)
+</td>
+<td style="text-align:left;">
+Davie Rd at Bert St
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dobbins Dr at Foxcroft Dr
+</td>
+<td style="text-align:left;">
+Dobbins Dr at Franklin Square
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dobbins Dr at Summerfield Crossing
+</td>
+<td style="text-align:left;">
+Summerfield Crossing Rd at Mossbark Ln
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Cameron Ave at S Columbia St (Swain Hall)
+</td>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+1745
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Carolina Ave
+</td>
+<td style="text-align:left;">
+E Franklin St at N Boundary St (WB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Couch Rd (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elliott Rd (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Davie Cir
+</td>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (EB)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+E Franklin St at #1512
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+E Franklin St at #1512
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+E Franklin St at #1512
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Henderson St
+</td>
+<td style="text-align:left;">
+E Franklin St at Varsity Theatre
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (EB)
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (EB)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Ave
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at N Boundary St (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Hillsborough St
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at N Boundary St (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Hillsborough St
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Park Pl
+</td>
+<td style="text-align:left;">
+E Franklin St at Davie Cir
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (WB)
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (Valley View Center)
+</td>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (WB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Raleigh St
+</td>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Park Pl
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Park Pl
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Varsity Theatre
+</td>
+<td style="text-align:left;">
+S Columbia St at Frat Ct
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Main St at Jade Palace
+</td>
+<td style="text-align:left;">
+W Main St at Inter-Faith Council
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Main St at Lloyd St
+</td>
+<td style="text-align:left;">
+E Main St at Jade Palace
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Main St at Lloyd St
+</td>
+<td style="text-align:left;">
+E Main St at Jade Palace
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elliott Rd at Burger King
+</td>
+<td style="text-align:left;">
+Ephesus Church Rd at Legion Rd (University Inn)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elliott Rd at Fordham Blvd (WB)
+</td>
+<td style="text-align:left;">
+Elliott Rd at Whole Foods Market
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elliott Rd at Plaza Theatres
+</td>
+<td style="text-align:left;">
+Elliott Rd at Burger King
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ephesus Church Rd at Eden Ln
+</td>
+<td style="text-align:left;">
+Ephesus Church Rd at Tinkerbell Rd (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ephesus Church Rd at Sharon Rd
+</td>
+<td style="text-align:left;">
+Colony Woods Dr at White Plains Rd
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ephesus Church Rd at Tinkerbell Rd (EB)
+</td>
+<td style="text-align:left;">
+Ephesus Church Rd at Landerwood Ln
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Weaver Dairy Rd
+</td>
+<td style="text-align:left;">
+Old Oxford Rd at Kirkwood Dr
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Dr at Community Center Dr
+</td>
+<td style="text-align:left;">
+Estes Dr at Camelot Apts
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Dr at Community Center Dr
+</td>
+<td style="text-align:left;">
+Estes Dr at Camelot Apts
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Dr at Somerset Dr
+</td>
+<td style="text-align:left;">
+Estes Dr at Phillips Middle School &amp; Park
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Franklin Street Trust Building
+</td>
+<td style="text-align:left;">
+Friday Center Dr at Park-and-Ride Driveway
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Friday Center Dr at Finley Forest Park
+</td>
+<td style="text-align:left;">
+Friday Center Dr at NC 54 (NB)
+</td>
+<td style="text-align:left;">
+1737
+</td>
+<td style="text-align:left;">
+UNC Hospitals-Botanical Garden-54 Park and Ride-Hendrick Building
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hamilton Rd at Maxwell Rd (NB 2)
+</td>
+<td style="text-align:left;">
+Brandon Rd at Hamilton Rd (WB)
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hamilton Rd at Maxwell Rd (SB 1)
+</td>
+<td style="text-align:left;">
+Hamilton Rd at Berkley Rd (SB)
+</td>
+<td style="text-align:left;">
+1734
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High St at Goldston Ave
+</td>
+<td style="text-align:left;">
+High St at Hillsborough Rd (Eastbound)
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High St at Goldston Ave
+</td>
+<td style="text-align:left;">
+W Main St at Westview Dr
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High St at Hillsborough Rd (Westbound)
+</td>
+<td style="text-align:left;">
+High St at Goldston Ave
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough Rd at Simpson St
+</td>
+<td style="text-align:left;">
+N Greensboro St at Morningside Dr
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough Rd at W Main St
+</td>
+<td style="text-align:left;">
+Hillsborough Rd at Pine St (NB)
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+144
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Homestead Rd at Sterling Bridge Rd
+</td>
+<td style="text-align:left;">
+Homestead Rd at Camden Ln
+</td>
+<td style="text-align:left;">
+1736
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Homestead Rd at Sterling Bridge Rd
+</td>
+<td style="text-align:left;">
+Rogers Rd at Sylvan Way
+</td>
+<td style="text-align:left;">
+1736
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Rd at Abbey Court (Collins Crossing Apts)
+</td>
+<td style="text-align:left;">
+Jones Ferry at Barnes St
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Rd at Alabama Ave
+</td>
+<td style="text-align:left;">
+NC 54 East at Westbrook Dr
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Rd at Chapel Hill Tire
+</td>
+<td style="text-align:left;">
+Jones Ferry Rd at Bim St (WB)
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Legion Rd at Forsyth Dr
+</td>
+<td style="text-align:left;">
+Legion Rd at Scarlet Dr
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Hospital Parking Deck
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Marsico Hall
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+172
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+Manning Dr at Hibbard Dr (WB)
+</td>
+<td style="text-align:left;">
+1741
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Gardens Apts
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Umstead Dr
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Estes Dr (YMCA)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Estes Dr (YMCA)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Estes Dr (YMCA)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Gardens Apts
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Gardens Apts
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Bolinwood Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Bolinwood Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+108
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Bolinwood Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Barclay Rd (NB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Estes Dr (YMCA)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Hillsborough St (Midtown Market)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Bolinwood Dr
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Hillsborough St (Midtown Market)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Bolinwood Dr
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Stateside Dr (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northfield Dr
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northfield Dr
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+252
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northfield Dr
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northfield Dr
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northfield Dr
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Longview St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Adelaide Walters Apts
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Mill Creek Apts
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Hillsborough St (Midtown Market)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at North St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northampton Plaza
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at North St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northampton Plaza
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northampton Plaza
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Mill Creek Apts
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northampton Plaza
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Mill Creek Apts
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Northampton Plaza
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Mill Creek Apts
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Riggsbee Mobile Home Park (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Stateside Dr (SB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+256
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Estes Dr (SB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Taylor St (Citgo)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (NB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Ashley Forest Dr
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Ashley Forest Dr
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Ashley Forest Dr
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (SB)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (SB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (SB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Town Hall
+</td>
+<td style="text-align:left;">
+N Columbia St at W Franklin St
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Umstead Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Longview St
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Umstead Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Longview St
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Westminster Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Riggsbee Mobile Home Park (SB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Westminster Dr
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Riggsbee Mobile Home Park (SB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mason Farm Rd at Ambulatory Care Center (EB)
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Odum Village
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mason Farm Rd at Ambulatory Care Center (EB)
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Odum Village
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mason Farm Rd at Ambulatory Care Center (EB)
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Odum Village
+</td>
+<td style="text-align:left;">
+1741
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mason Farm Rd at Ambulatory Care Center (EB)
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Odum Village
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mason Farm Rd at Marsico Hall
+</td>
+<td style="text-align:left;">
+S Columbia St at Westwood Dr
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+McCauley St at Pharmacy Ln
+</td>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Coker Hall)
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merritt Mill Rd at Locust Ct
+</td>
+<td style="text-align:left;">
+Cameron Ave at S Roberson St
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merritt Mill Rd at Locust Ct
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at Lincoln Center
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merritt Mill Rd at Manley Estates
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at Roberts St
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merritt Mill Rd at S Greenboro St
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at Manley Estates
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at North St
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at North St
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at North St
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at #503
+</td>
+<td style="text-align:left;">
+N Greensboro St at Fitch Lumber
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Bolin Forest
+</td>
+<td style="text-align:left;">
+N Greensboro St at Morningside Dr
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Cedar Ct
+</td>
+<td style="text-align:left;">
+N Greensboro St at Oak Ave
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Cheek Ave
+</td>
+<td style="text-align:left;">
+N Greensboro St at Sue Ann Ct
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Harris Teeter
+</td>
+<td style="text-align:left;">
+N Greensboro St at Cedar Ct
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Morningside Dr
+</td>
+<td style="text-align:left;">
+N Greensboro St at Milton Dr
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Oak Ave
+</td>
+<td style="text-align:left;">
+N Greensboro St at #503
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Oak Ave
+</td>
+<td style="text-align:left;">
+N Greensboro St at Williams St
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Greensboro St at Sue Ann Ct
+</td>
+<td style="text-align:left;">
+N Greensboro St at Todd St
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Lakeshore Dr at #2121
+</td>
+<td style="text-align:left;">
+N Lakeshore Dr at Kenmore Rd
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Lakeshore Dr at Arlington St
+</td>
+<td style="text-align:left;">
+N Lakeshore Dr at Kenmore Rd
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Lakeshore Dr at Brookview Rd
+</td>
+<td style="text-align:left;">
+Honeysuckle Rd at Honeysuckle Ct
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Lakeshore Dr at Rock Creek Rd
+</td>
+<td style="text-align:left;">
+N Lakeshore Dr at #1822
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Harris Inc (Fenway Park)
+</td>
+<td style="text-align:left;">
+NC 54 East at Westbrook Dr
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 East at Berkshire Manor West
+</td>
+<td style="text-align:left;">
+NC 54 at Poplar Ave (The Crest Apts)
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 East at Canterbury Apts
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at S Greenboro St
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 East at Westbrook Dr
+</td>
+<td style="text-align:left;">
+NC 54 East at Canterbury Apts
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 West at Royal Park
+</td>
+<td style="text-align:left;">
+NC 54 West at Carolina Apartments
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Fayetteville Rd at Autumn Woods (north)
+</td>
+<td style="text-align:left;">
+Old Fayetteville Rd at Ramsgate Apt
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Fayetteville Rd at Autumn Woods (north)
+</td>
+<td style="text-align:left;">
+Old Fayetteville Rd at Ramsgate Apt
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Fayetteville Rd at Pine Grove
+</td>
+<td style="text-align:left;">
+Carol St at Old Fayetteville Rd
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Old Fayetteville Rd at Poplar Place (NB)
+</td>
+<td style="text-align:left;">
+Old Fayetteville Rd at Autumn Woods (south)
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Orange County Social Services
+</td>
+<td style="text-align:left;">
+Seymour Center at Homestead Rd (NB)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at University Dr
+</td>
+<td style="text-align:left;">
+S Columbia St at Westwood Dr
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+Raleigh Rd at UNC Administration (WB)
+</td>
+<td style="text-align:left;">
+1734
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Greenwood Rd (WB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at St Thomas More (WB)
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Oakwood Dr
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Oakwood Dr
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at UNC Administration (WB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Greenwood Rd (WB)
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at UNC Administration (WB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Greenwood Rd (WB)
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at UNC Administration (WB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Greenwood Rd (WB)
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh St at Alderman Hall
+</td>
+<td style="text-align:left;">
+E Franklin St at Pickard Ln (Morehead Planetarium)
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh St at Connor Hall
+</td>
+<td style="text-align:left;">
+Raleigh St at Lewis Hall
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh St at Spencer Hall
+</td>
+<td style="text-align:left;">
+Raleigh St at Mangum Hall
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ridge Rd at Law School (NB)
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (WB)
+</td>
+<td style="text-align:left;">
+1745
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rogers Rd at Purefoy Dr
+</td>
+<td style="text-align:left;">
+Rogers Rd at Rusch Rd
+</td>
+<td style="text-align:left;">
+1736
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rogers Rd at Tallyho Tr
+</td>
+<td style="text-align:left;">
+Rogers Rd at Claymore Rd
+</td>
+<td style="text-align:left;">
+1736
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Carrington Hall
+</td>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Carrington Hall
+</td>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Coker Hall)
+</td>
+<td style="text-align:left;">
+1733
+</td>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+136
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Carrington Hall
+</td>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Coker Hall)
+</td>
+<td style="text-align:left;">
+1746
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Mason Farm Rd
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+244
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Westwood Dr
+</td>
+<td style="text-align:left;">
+S Columbia St at Purefoy Rd
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Greensboro St at Rocky Brook Trailer Court
+</td>
+<td style="text-align:left;">
+NC 54 West at Royal Park
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Severin St at Bradley Rd (SB)
+</td>
+<td style="text-align:left;">
+Bradley Rd at Williams Circle (SB)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smith Level Rd at BPW Club Rd (NB)
+</td>
+<td style="text-align:left;">
+Smith Level Rd at Willow Oak Ln
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smith Level Rd at FPG School
+</td>
+<td style="text-align:left;">
+NC 54 East at Kingswood
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smith Level Rd at Public Works Dept
+</td>
+<td style="text-align:left;">
+Smith Level Rd at Willow Oak Ln
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at St Thomas More (EB)
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Country Club Rd (WB)
+</td>
+<td style="text-align:left;">
+South Rd at Raleigh St
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+1733
+</td>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+128
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+1746
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+6821
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Raleigh St
+</td>
+<td style="text-align:left;">
+Raleigh St at Lewis Hall
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Woollen Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+1734
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Standish Dr at Old Durham Rd
+</td>
+<td style="text-align:left;">
+Standish Dr at Sir Richard Ln
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Summerfield Crossing Rd at Berry Patch Ln
+</td>
+<td style="text-align:left;">
+Summerfield Crossing Rd at Beaver Dam Ct
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Summerfield Crossing Rd at Mossbark Ln
+</td>
+<td style="text-align:left;">
+Summerfield Crossing at Grist Mill
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tar Hill Dr at BPW Club Rd (NB)
+</td>
+<td style="text-align:left;">
+BPW Club Rd at Tennis Courts
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tar Hill Dr at Rock Haven Rd (SB)
+</td>
+<td style="text-align:left;">
+Carrboro High School (SB)
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+US 15-501 Service Rd at Rams Plaza
+</td>
+<td style="text-align:left;">
+US 15-501 Service Rd at Hampton Inn
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+US 15-501 South at Culbreth Rd
+</td>
+<td style="text-align:left;">
+US 15-501 South at Bennett Rd
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Village Dr at Estes Dr
+</td>
+<td style="text-align:left;">
+Estes Park Apartments
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Barbee Ch Rd at Meadowmont Village Cir
+</td>
+<td style="text-align:left;">
+W Barbee Ch Rd at Weaver Mine Tr
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Barbee Ch Rd at Old Barn Ln
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Burning Tree Dr
+</td>
+<td style="text-align:left;">
+1747
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Franklin St at N Graham St (WB)
+</td>
+<td style="text-align:left;">
+E Main St at Lloyd St
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Franklin St at N Graham St (WB)
+</td>
+<td style="text-align:left;">
+E Main St at Lloyd St
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Franklin St at University Baptist
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Main St at Club Nova Thrift
+</td>
+<td style="text-align:left;">
+E Main St at Weaver St Realty
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+225
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Main St at Simpson St
+</td>
+<td style="text-align:left;">
+W Main St at Westview Dr
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Main St at Westview Dr
+</td>
+<td style="text-align:left;">
+High St at Goldston Ave
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Poplar Ave at Lilac Dr
+</td>
+<td style="text-align:left;">
+W Poplar Ave at Raven Ln
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+148
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Poplar Ave at NC 54
+</td>
+<td style="text-align:left;">
+W Poplar Ave at Lilac Dr
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Poplar Ave at Raven Ln
+</td>
+<td style="text-align:left;">
+W Poplar Ave at Lilac Dr
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Rosemary St at N Roberson St (Mama Dip’s across)
+</td>
+<td style="text-align:left;">
+W Rosemary St at Mini-Mart
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Rosemary St at Pritchard Ave
+</td>
+<td style="text-align:left;">
+Hillsborough St at E Rosemary St
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver Dairy Rd at Essex Dr
+</td>
+<td style="text-align:left;">
+Carol Woods
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+East Chapel Hill High School
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver Dairy Rd at Vilcom Campus
+</td>
+<td style="text-align:left;">
+Westminster Dr at Martin Luther King Jr Blvd (EB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver St at Carrboro Century Center
+</td>
+<td style="text-align:left;">
+E Main St at Arts Center Plaza
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver St at Weaver St Market
+</td>
+<td style="text-align:left;">
+Weaver St at Lindsay St
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weiner St at Barclay Rd
+</td>
+<td style="text-align:left;">
+Barclay Rd at Williams Circle (EB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weiner St at Severin St
+</td>
+<td style="text-align:left;">
+Severin St at #224
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Westminster Dr at Martin Luther King Jr Blvd (EB)
+</td>
+<td style="text-align:left;">
+Westminster Dr at Traffic Circle
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Westminster Dr at Traffic Circle
+</td>
+<td style="text-align:left;">
+Banks Dr at Westminster Dr (Food Lion)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Westminster Dr at Traffic Circle
+</td>
+<td style="text-align:left;">
+Westminster Dr at Timberlyne Theatre
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Westminster Dr at Traffic Circle
+</td>
+<td style="text-align:left;">
+Westminster Dr at Timberlyne Theatre
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willow Dr at Connor Dr
+</td>
+<td style="text-align:left;">
+Willow Dr at Willow Terrace Condos
+</td>
+<td style="text-align:left;">
+1730
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Legion Rd at Scarlet Dr
+</td>
+<td style="text-align:left;">
+Legion Rd Ext at Cooper St
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+4.96
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+108
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Hibbard Dr (WB)
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+4.86
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Hibbard Dr (WB)
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.86
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+244
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1752
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+6821
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+86
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1741
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Sitterson Hall &amp; ROTC
+</td>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stadium Dr at Stadium Gate #2
+</td>
+<td style="text-align:left;">
+Stadium Dr at Ridge Rd
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+4.81
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stadium Dr at Stadium Gate #2
+</td>
+<td style="text-align:left;">
+Stadium Dr at Ridge Rd
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.81
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Purefoy Rd
+</td>
+<td style="text-align:left;">
+US 15-501 South at Culbreth Rd
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+4.77
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Purefoy Rd
+</td>
+<td style="text-align:left;">
+US 15-501 South at Culbreth Rd
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+4.77
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Carrington Hall
+</td>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Coker Hall)
+</td>
+<td style="text-align:left;">
+6821
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:right;">
+4.70
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Plant Rd (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+4.64
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 West at Carolina Apartments
+</td>
+<td style="text-align:left;">
+Jones Ferry Rd at Abbey Court (Collins Crossing Apts)
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.62
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Hibbard Dr (EB)
+</td>
+<td style="text-align:left;">
+Manning Dr at Craige Parking Deck
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+4.60
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Coker Hall)
+</td>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+4.58
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.56
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+4.56
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+1752
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:right;">
+4.56
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Townhouse Apts
+</td>
+<td style="text-align:left;">
+Hillsborough St at North St
+</td>
+<td style="text-align:left;">
+1743
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.52
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bowles Dr at Smith Center (EB)
+</td>
+<td style="text-align:left;">
+Manning Lot at Family Practice Building
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+4.50
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at University Dr
+</td>
+<td style="text-align:left;">
+Mason Farm Rd at Ambulatory Care Center (EB)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.45
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+188
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+4.43
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough Rd at Blueridge Rd
+</td>
+<td style="text-align:left;">
+Hillsborough Rd at #904
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cameron Ave at New East Hall
+</td>
+<td style="text-align:left;">
+E Cameron Ave at S Columbia St (Swain Hall)
+</td>
+<td style="text-align:left;">
+1745
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+4.38
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ridge Rd at Rams Head Center
+</td>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+4.32
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ridge Rd at Rams Head Center
+</td>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+4.32
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Oakwood Dr
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+1746
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:right;">
+4.27
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh St at Lewis Hall
+</td>
+<td style="text-align:left;">
+Cameron Ave at New East Hall
+</td>
+<td style="text-align:left;">
+1745
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:right;">
+4.24
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+264
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+W Franklin St at N Columbia St
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sage Rd at Dobbins Dr (SB)
+</td>
+<td style="text-align:left;">
+Old Durham Rd at Heard Family Market
+</td>
+<td style="text-align:left;">
+1725
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.21
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Westminster Dr at Martin Luther King Jr Blvd (EB)
+</td>
+<td style="text-align:left;">
+Westminster Dr at Traffic Circle
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+4.17
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estes Dr at Post Office
+</td>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+4.09
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eubanks Rd at Northwood Dr
+</td>
+<td style="text-align:left;">
+Eubanks Rd Park-and-Ride Lot
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+4.07
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Legion Rd at Forsyth Dr
+</td>
+<td style="text-align:left;">
+Legion Rd at Scarlet Dr
+</td>
+<td style="text-align:left;">
+1729
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:right;">
+4.01
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+108
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Craige Parking Deck
+</td>
+<td style="text-align:left;">
+Ridge Rd at Ehringhaus Hall
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+3.99
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at University Dr
+</td>
+<td style="text-align:left;">
+Manning Dr at Hospital Parking Deck
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+3.94
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Friday Center Dr at Park-and-Ride Driveway
+</td>
+<td style="text-align:left;">
+Meadowmont Ln at Village Crossing Dr
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+3.93
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Varsity Theatre
+</td>
+<td style="text-align:left;">
+S Columbia St at Frat Ct
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Henderson St
+</td>
+<td style="text-align:left;">
+E Franklin St at Varsity Theatre
+</td>
+<td style="text-align:left;">
+1734
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:right;">
+3.89
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Henderson St
+</td>
+<td style="text-align:left;">
+E Franklin St at Varsity Theatre
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+3.89
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+Manning Dr at Hibbard Dr (WB)
+</td>
+<td style="text-align:left;">
+1752
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:right;">
+3.89
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+Estes Dr at Community Center Dr
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+3.84
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Frat Ct
+</td>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+3.82
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Frat Ct
+</td>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+3.82
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East Dr at Jackson Cir
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East Dr at Jackson Cir
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East Dr at Jackson Cir
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+3.81
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Main St at Arts Center Plaza
+</td>
+<td style="text-align:left;">
+W Franklin St at S Granham St (Chapel Hill News)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+3.76
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Bell Tower Dr (Kenan Labs)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+3.75
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+1723
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:right;">
+3.43
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+86
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+1735
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:right;">
+3.43
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+3.43
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+2.93
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Abernethy Hall
+</td>
+<td style="text-align:left;">
+W Franklin St at N Columbia St
+</td>
+<td style="text-align:left;">
+1728
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:right;">
+2.81
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+144
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Carolina Coffee Shop
+</td>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+2.43
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East Dr at Jackson Cir
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+1.90
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at McCauley St (Newman Center)
+</td>
+<td style="text-align:left;">
+Pittsboro St at Vance St (Credit Union)
+</td>
+<td style="text-align:left;">
+1727
+</td>
+<td style="text-align:left;">
+Carrboro Plaza Express
+</td>
+<td style="text-align:right;">
+1.77
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+McDougle Middle School Track
+</td>
+<td style="text-align:left;">
+Old Fayetteville Rd at Pine Grove
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+1.33
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="duke-transit-gtfs-feed" class="section level2">
+<h2>Duke Transit GTFS Feed</h2>
+<div id="high-and-low-speed-links-1" class="section level3">
+<h3>High and Low Speed Links</h3>
+<p><img src="K:/Projects/OrangeCoNC/Features/R/orange-county-gtfs-reviewduke_gtfs_20190830_high_low_speed.png" /></p>
+</div>
+<div id="miles-per-route-of-segments-with-60mph-speed-1" class="section level3">
+<h3>Miles per Route of Segments with &gt;60mph Speed</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+miles_over_60
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East-West-Smith Warehouse
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="miles-per-route-of-segments-with-5mph-speed-1" class="section level3">
+<h3>Miles per Route of Segments with &lt;5mph Speed</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+miles_under_5
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:right;">
+0.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Broad-Erwin
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bassett-Research
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Swift Avenue Shuttle
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Class Change
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-stop-to-stop-segments-with-high-and-low-speeds-1" class="section level3">
+<h3>All Stop-to-Stop Segments with High and Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Central Campus (Eastbound)
+</td>
+<td style="text-align:left;">
+Campus Dr at Swift Ave (EB)
+</td>
+<td style="text-align:left;">
+1685
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Central Campus (Eastbound)
+</td>
+<td style="text-align:left;">
+Campus Dr at Swift Ave (EB)
+</td>
+<td style="text-align:left;">
+1693
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+479
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Chapel Circle (EB)
+</td>
+<td style="text-align:left;">
+Campus Dr at Anderson St (Eastbound)
+</td>
+<td style="text-align:left;">
+1693
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+449
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Maxwell St (WB)
+</td>
+<td style="text-align:left;">
+Campus Dr at Arts Annex (WB)
+</td>
+<td style="text-align:left;">
+12945
+</td>
+<td style="text-align:left;">
+East-West-Smith Warehouse
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Maxwell St (WB)
+</td>
+<td style="text-align:left;">
+Campus Dr at Arts Annex (WB)
+</td>
+<td style="text-align:left;">
+1693
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+451
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Nasher (Westbound)
+</td>
+<td style="text-align:left;">
+Campus Dr at Anderson St (Westbound)
+</td>
+<td style="text-align:left;">
+1685
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Circuit Dr at Circuit Lot Ext (Westbound)
+</td>
+<td style="text-align:left;">
+Circuit Dr at Towerview Rd
+</td>
+<td style="text-align:left;">
+1680
+</td>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Research Dr
+</td>
+<td style="text-align:left;">
+Fulton St at Erwin Rd (Duke Hospital Parking Garage)
+</td>
+<td style="text-align:left;">
+1679
+</td>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Research Dr at Duke Clinic
+</td>
+<td style="text-align:left;">
+Research Dr at Nanaline Duke Bldg (NB)
+</td>
+<td style="text-align:left;">
+1679
+</td>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Science Dr at Bassett Dr (NB)
+</td>
+<td style="text-align:left;">
+Science Dr at Fuqua School of Business (NB)
+</td>
+<td style="text-align:left;">
+1685
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Swift Ave at Faber St
+</td>
+<td style="text-align:left;">
+Swift Avenue at Caswell Pl (EB)
+</td>
+<td style="text-align:left;">
+1685
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Chapel Circle (EB)
+</td>
+<td style="text-align:left;">
+Campus Dr at Anderson St (Eastbound)
+</td>
+<td style="text-align:left;">
+1685
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:right;">
+4.93
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Perry St at 705 Broad Street Bldg
+</td>
+<td style="text-align:left;">
+Shops at Erwin Mill
+</td>
+<td style="text-align:left;">
+1690
+</td>
+<td style="text-align:left;">
+Broad-Erwin
+</td>
+<td style="text-align:right;">
+4.87
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trent Dr at Erwin Rd (Clipp Research Bldg)
+</td>
+<td style="text-align:left;">
+Trent Dr at Duke Hospital South (EB)
+</td>
+<td style="text-align:left;">
+1683
+</td>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:right;">
+4.82
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LaSalle St at Campus Walk Ave (Belmont Apts)
+</td>
+<td style="text-align:left;">
+LaSalle St at Grace Healthcare
+</td>
+<td style="text-align:left;">
+1680
+</td>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:right;">
+4.81
+</td>
+<td style="text-align:right;">
+0.24
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Science Dr at Biological Sciences Bldg (Southbound)
+</td>
+<td style="text-align:left;">
+Towerview Rd at Gross Hall Labs
+</td>
+<td style="text-align:left;">
+1681
+</td>
+<td style="text-align:left;">
+Bassett-Research
+</td>
+<td style="text-align:right;">
+4.51
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Fulton St (VA Hospital)
+</td>
+<td style="text-align:left;">
+Hock Plaza (2424 Erwin Rd)
+</td>
+<td style="text-align:left;">
+1690
+</td>
+<td style="text-align:left;">
+Broad-Erwin
+</td>
+<td style="text-align:right;">
+4.48
+</td>
+<td style="text-align:right;">
+0.22
+</td>
+<td style="text-align:right;">
+78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Swift Ave at Faber St
+</td>
+<td style="text-align:left;">
+Swift Avenue at Caswell Pl (EB)
+</td>
+<td style="text-align:left;">
+3314
+</td>
+<td style="text-align:left;">
+Class Change
+</td>
+<td style="text-align:right;">
+4.18
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Research Dr at Nanaline Duke Bldg (NB)
+</td>
+<td style="text-align:left;">
+Circuit Dr at Circuit Lot (Westbound)
+</td>
+<td style="text-align:left;">
+1680
+</td>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:right;">
+4.16
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Main St at Erwin Rd
+</td>
+<td style="text-align:left;">
+Perry St at 705 Broad Street Bldg
+</td>
+<td style="text-align:left;">
+1690
+</td>
+<td style="text-align:left;">
+Broad-Erwin
+</td>
+<td style="text-align:right;">
+3.76
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Chapel Circle (Admissions)
+</td>
+<td style="text-align:left;">
+West Campus Chapel
+</td>
+<td style="text-align:left;">
+1693
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Research Dr at Nanaline Duke Bldg (NB)
+</td>
+<td style="text-align:left;">
+Circuit Dr at Circuit Lot (Westbound)
+</td>
+<td style="text-align:left;">
+1681
+</td>
+<td style="text-align:left;">
+Bassett-Research
+</td>
+<td style="text-align:right;">
+3.12
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alexander Ave at Pace St (Ubuntu House)
+</td>
+<td style="text-align:left;">
+Swift Ave at 300 Swift Apts
+</td>
+<td style="text-align:left;">
+13048
+</td>
+<td style="text-align:left;">
+Swift Avenue Shuttle
+</td>
+<td style="text-align:right;">
+2.99
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fulton St at Erwin Rd (Duke Hospital Parking Garage)
+</td>
+<td style="text-align:left;">
+Fulton St at Pratt St
+</td>
+<td style="text-align:left;">
+1679
+</td>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:right;">
+2.77
+</td>
+<td style="text-align:right;">
+0.14
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duke Medical Pavilion/Cancer Ctr
+</td>
+<td style="text-align:left;">
+Yearby Ave at H Lot (Westbound)
+</td>
+<td style="text-align:left;">
+1683
+</td>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:right;">
+2.54
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fulton St at Erwin Rd (Duke Hospital Parking Garage)
+</td>
+<td style="text-align:left;">
+Parking Garage 3 at Duke North Pavilion
+</td>
+<td style="text-align:left;">
+1683
+</td>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:right;">
+1.79
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+120
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
