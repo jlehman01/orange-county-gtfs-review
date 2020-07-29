@@ -343,7 +343,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Orange County GTFS Feed QA/QC</a>
+      <a class="navbar-brand" href="index.html">Orange County GTFS QA/QC</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -351,7 +351,7 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="schedule_analysis.html">Routes and Schedule Analysis</a>
+  <a href="schedule_analysis.html">Routes &amp; Schedule Analysis</a>
 </li>
 <li>
   <a href="validation.html">Feed Validation</a>
@@ -360,7 +360,10 @@ div.tocify {
   <a href="frequency_analysis.html">Frequency Analysis</a>
 </li>
 <li>
-  <a href="service_speed_analysis.html">Service Speed Analysis</a>
+  <a href="service_speed_analysis.html">Speed Analysis</a>
+</li>
+<li>
+  <a href="findings.html">Findings</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -1175,6 +1178,4758 @@ NA
 <div id="duke-transit-gtfs-feed" class="section level2">
 <h2>Duke Transit GTFS Feed</h2>
 <div id="gtfs-validation-issues-1" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="gocary-gtfs-feed" class="section level2">
+<h2>GoCary GTFS Feed</h2>
+<div id="gtfs-validation-issues-2" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="godurham-gtfs-feed" class="section level2">
+<h2>GoDurham GTFS Feed</h2>
+<div id="gtfs-validation-issues-3" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="goraleigh-gtfs-feed" class="section level2">
+<h2>GoRaleigh GTFS Feed</h2>
+<div id="gtfs-validation-issues-4" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="gotriangle-gtfs-feed" class="section level2">
+<h2>GoTriangle GTFS Feed</h2>
+<div id="gtfs-validation-issues-5" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ncsu-wolfline-gtfs-feed" class="section level2">
+<h2>NCSU Wolfline GTFS Feed</h2>
+<div id="gtfs-validation-issues-6" class="section level3">
+<h3>GTFS Validation Issues</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+file
+</th>
+<th style="text-align:left;">
+file_spec
+</th>
+<th style="text-align:left;">
+file_provided_status
+</th>
+<th style="text-align:left;">
+field
+</th>
+<th style="text-align:left;">
+field_spec
+</th>
+<th style="text-align:left;">
+field_provided_status
+</th>
+<th style="text-align:left;">
+validation_status
+</th>
+<th style="text-align:left;">
+validation_details
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+monday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+tuesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+wednesday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+thursday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+friday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+saturday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+sunday
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+start_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+calendar
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+end_date
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lat
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stops
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_lon
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_short_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_long_name
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+routes
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_type
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+route_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+service_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trips
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+trip_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+arrival_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+departure_time
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_id
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+stop_times
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+stop_sequence
+</td>
+<td style="text-align:left;">
+req
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+ok
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="piedmont-authority-for-regional-transportation-gtfs-feed" class="section level2">
+<h2>Piedmont Authority for Regional Transportation GTFS Feed</h2>
+<div id="gtfs-validation-issues-7" class="section level3">
 <h3>GTFS Validation Issues</h3>
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
