@@ -48,3 +48,5 @@ service_speed_analysis.Rmd
 validation.Rmd
 findings.Rmd
 .Renviron
+_site.yml
+build_site.R
