@@ -37,3 +37,14 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# basic scripts
+about.Rmd
+/archive/
+frequency_analysis.Rmd
+index.Rmd
+schedule_analysis.Rmd
+service_speed_analysis.Rmd
+validation.Rmd
+findings.Rmd
+.Renviron

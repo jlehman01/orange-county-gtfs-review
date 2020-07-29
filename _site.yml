@@ -1,0 +1,26 @@
+
+name: "orange-county-gtfs-review"  
+author: "Renaissance Planning"  
+output_dir: "docs"  
+output:  
+  html_document:  
+    self_contained: no  
+    theme: flatly  
+    toc: true
+    toc_float: true
+    toc_depth: 2
+navbar:  
+  title: "Orange County GTFS QA/QC"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Routes & Schedule Analysis"
+      href: schedule_analysis.html
+    - text: "Feed Validation"
+      href: validation.html
+    - text: "Frequency Analysis"
+      href: frequency_analysis.html
+    - text: "Speed Analysis"
+      href: service_speed_analysis.html
+    - text: "Findings"
+      href: findings.html     
