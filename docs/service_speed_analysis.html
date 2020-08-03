@@ -387,7 +387,20 @@ div.tocify {
 <h2>Chapel Hill Transit GTFS Feed</h2>
 <div id="high-and-low-speed-links" class="section level3">
 <h3>High and Low Speed Links</h3>
-<p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-1.png" width="960" /> *Infinite values represented as 99 in map.</p>
+<p>|<br />
+| | 0% |<br />
+|======= | 8% |<br />
+|============== | 17% |<br />
+|====================== | 25% |<br />
+|============================= | 33% |<br />
+|==================================== | 42% |<br />
+|=========================================== | 50% |<br />
+|================================================== | 58% |<br />
+|========================================================= | 67% |<br />
+|================================================================ | 75% |<br />
+|======================================================================== | 83% |<br />
+|=============================================================================== | 92% |<br />
+|======================================================================================| 100% <img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-1.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed" class="section level3">
 <h3>Miles per Route of Segments with &gt;60mph Speed</h3>
@@ -831,11 +844,804 @@ Franklin St-University Place-Colony Woods
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Carol Woods
+</td>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carol Woods
+</td>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Carolina Ave
+</td>
+<td style="text-align:left;">
+E Franklin St at N Boundary St (WB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Davie Cir
+</td>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (EB)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Howell Ln (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Ave
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Elliott Rd at Burger King
+</td>
+<td style="text-align:left;">
+Ephesus Church Rd at Legion Rd (University Inn)
+</td>
+<td style="text-align:left;">
+1732
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Ferry Rd at Alabama Ave
+</td>
+<td style="text-align:left;">
+NC 54 East at Westbrook Dr
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Manning Dr at Public Safety
+</td>
+<td style="text-align:left;">
+Manning Dr at UNC Hospitals (CG Lot)
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Gardens Apts
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Umstead Dr
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Stateside Dr (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Riggsbee Mobile Home Park (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Stateside Dr (SB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+256
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Shadowood Ct (NB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Timber Hollow (NB)
+</td>
+<td style="text-align:left;">
+1749
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Taylor St (Citgo)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Homestead Rd (NB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merritt Mill Rd at S Greenboro St
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at Manley Estates
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Harris Inc (Fenway Park)
+</td>
+<td style="text-align:left;">
+NC 54 East at Westbrook Dr
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.66
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 East at Canterbury Apts
+</td>
+<td style="text-align:left;">
+Merritt Mill Rd at S Greenboro St
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at University Dr
+</td>
+<td style="text-align:left;">
+S Columbia St at Westwood Dr
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at Greenwood Rd (WB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at St Thomas More (WB)
+</td>
+<td style="text-align:left;">
+6830
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Mason Farm Rd
+</td>
+<td style="text-align:left;">
+S Columbia St at Health Sciences Library
+</td>
+<td style="text-align:left;">
+1739
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Columbia St at Westwood Dr
+</td>
+<td style="text-align:left;">
+S Columbia St at Purefoy Rd
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Greensboro St at Rocky Brook Trailer Court
+</td>
+<td style="text-align:left;">
+NC 54 West at Royal Park
+</td>
+<td style="text-align:left;">
+1738
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Smith Level Rd at FPG School
+</td>
+<td style="text-align:left;">
+NC 54 East at Kingswood
+</td>
+<td style="text-align:left;">
+1740
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+US 15-501 South at Culbreth Rd
+</td>
+<td style="text-align:left;">
+US 15-501 South at Bennett Rd
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.49
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Rosemary St at Pritchard Ave
+</td>
+<td style="text-align:left;">
+Hillsborough St at E Rosemary St
+</td>
+<td style="text-align:left;">
+1748
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver Dairy Rd at Steeplechase Rd
+</td>
+<td style="text-align:left;">
+East Chapel Hill High School
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weaver Dairy Rd at Vilcom Campus
+</td>
+<td style="text-align:left;">
+Westminster Dr at Martin Luther King Jr Blvd (EB)
+</td>
+<td style="text-align:left;">
+1750
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weiner St at Barclay Rd
+</td>
+<td style="text-align:left;">
+Barclay Rd at Williams Circle (EB)
+</td>
+<td style="text-align:left;">
+1751
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bowles Dr at Smith Center (EB)
+</td>
+<td style="text-align:left;">
+Manning Lot at Family Practice Building
+</td>
+<td style="text-align:left;">
+1726
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:right;">
+4.50
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eubanks Rd at Northwood Dr
+</td>
+<td style="text-align:left;">
+Eubanks Rd Park-and-Ride Lot
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+4.07
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pittsboro St at University Dr
+</td>
+<td style="text-align:left;">
+Manning Dr at Hospital Parking Deck
+</td>
+<td style="text-align:left;">
+1742
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:right;">
+3.94
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Friday Center Dr at Park-and-Ride Driveway
+</td>
+<td style="text-align:left;">
+Meadowmont Ln at Village Crossing Dr
+</td>
+<td style="text-align:left;">
+1753
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:right;">
+3.93
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+1724
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:right;">
+2.93
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="duke-transit-gtfs-feed" class="section level2">
 <h2>Duke Transit GTFS Feed</h2>
 <div id="high-and-low-speed-links-1" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |===== | 6% | |=========== | 12% | |================ | 19% | |====================== | 25% | |=========================== | 31% | |================================ | 38% | |====================================== | 44% | |=========================================== | 50% | |================================================ | 56% | |====================================================== | 62% | |=========================================================== | 69% | |================================================================ | 75% | |====================================================================== | 81% | |=========================================================================== | 88% | |================================================================================= | 94% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-2.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-1" class="section level3">
@@ -984,11 +1790,114 @@ Remote Lot-Hospital
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-1" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Campus Dr at Chapel Circle (Admissions)
+</td>
+<td style="text-align:left;">
+West Campus Chapel
+</td>
+<td style="text-align:left;">
+1693
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alexander Ave at Pace St (Ubuntu House)
+</td>
+<td style="text-align:left;">
+Swift Ave at 300 Swift Apts
+</td>
+<td style="text-align:left;">
+13048
+</td>
+<td style="text-align:left;">
+Swift Avenue Shuttle
+</td>
+<td style="text-align:right;">
+2.99
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duke Medical Pavilion/Cancer Ctr
+</td>
+<td style="text-align:left;">
+Yearby Ave at H Lot (Westbound)
+</td>
+<td style="text-align:left;">
+1683
+</td>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:right;">
+2.54
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="gocary-gtfs-feed" class="section level2">
 <h2>GoCary GTFS Feed</h2>
 <div id="high-and-low-speed-links-2" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |======= | 8% | |============== | 17% | |====================== | 25% | |============================= | 33% | |==================================== | 42% | |=========================================== | 50% | |================================================== | 58% | |========================================================= | 67% | |================================================================ | 75% | |======================================================================== | 83% | |=============================================================================== | 92% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-3.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-2" class="section level3">
@@ -1105,11 +2014,298 @@ Maynard Road (Clockwise)
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-2" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Buck Jones Rd at Farm Gate Rd (EB)
+</td>
+<td style="text-align:left;">
+Buck Jones Rd at Bashford Rd
+</td>
+<td style="text-align:left;">
+1722
+</td>
+<td style="text-align:left;">
+Buck Jones Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buck Jones Rd at Orchard St
+</td>
+<td style="text-align:left;">
+Buck Jones Rd at Barclay Dr (WB)
+</td>
+<td style="text-align:left;">
+1722
+</td>
+<td style="text-align:left;">
+Buck Jones Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Chatham St at Circle Dr (Urban Park)
+</td>
+<td style="text-align:left;">
+E Chatham St at Reedy Creek Rd
+</td>
+<td style="text-align:left;">
+1722
+</td>
+<td style="text-align:left;">
+Buck Jones Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Chatham St at NE Maynard Rd (WB)
+</td>
+<td style="text-align:left;">
+E Chatham St at Ward St (Urban Park)
+</td>
+<td style="text-align:left;">
+1722
+</td>
+<td style="text-align:left;">
+Buck Jones Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harrison Ave at NE Maynard Rd (NB)
+</td>
+<td style="text-align:left;">
+N Harrison Ave at Harrison Point Shopping Center
+</td>
+<td style="text-align:left;">
+1719
+</td>
+<td style="text-align:left;">
+Harrison Avenue
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+High House Rd at Cornerstone Dr
+</td>
+<td style="text-align:left;">
+High House Rd at Davis Dr (EB)
+</td>
+<td style="text-align:left;">
+1720
+</td>
+<td style="text-align:left;">
+High House Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Maynard Crossing at Kroger
+</td>
+<td style="text-align:left;">
+High House Rd at Edgehill Pky
+</td>
+<td style="text-align:left;">
+1720
+</td>
+<td style="text-align:left;">
+High House Road
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+100
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Harrison Ave at Dynasty Dr (SB)
+</td>
+<td style="text-align:left;">
+N Harrison Ave at Harrison Grande Dr
+</td>
+<td style="text-align:left;">
+1719
+</td>
+<td style="text-align:left;">
+Harrison Avenue
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Norwell Blvd at NW Cary Pkwy (North Cary Park)
+</td>
+<td style="text-align:left;">
+Norwell Blv at Weston Oaks Ct
+</td>
+<td style="text-align:left;">
+1719
+</td>
+<td style="text-align:left;">
+Harrison Avenue
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SE Maynard Rd at Village Greenway
+</td>
+<td style="text-align:left;">
+SE Maynard Rd at Quinard Dr
+</td>
+<td style="text-align:left;">
+1718
+</td>
+<td style="text-align:left;">
+Maynard Rd (Counterclockwise)
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+106
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weston Pkwy at Southhill Dr
+</td>
+<td style="text-align:left;">
+Harrison Oaks Blvd at Weston Pkwy
+</td>
+<td style="text-align:left;">
+1719
+</td>
+<td style="text-align:left;">
+Harrison Avenue
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+102
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="godurham-gtfs-feed" class="section level2">
 <h2>GoDurham GTFS Feed</h2>
 <div id="high-and-low-speed-links-3" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |======= | 8% | |============== | 17% | |====================== | 25% | |============================= | 33% | |==================================== | 42% | |=========================================== | 50% | |================================================== | 58% | |========================================================= | 67% | |================================================================ | 75% | |======================================================================== | 83% | |=============================================================================== | 92% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-4.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-3" class="section level3">
@@ -1506,11 +2702,850 @@ Northgate-North Pointe-Loehmanns
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-3" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alston Ave at Cecil St (NCCU)
+</td>
+<td style="text-align:left;">
+NC 55 at Dakota St (SB)
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alston Ave at Cecil St (NCCU)
+</td>
+<td style="text-align:left;">
+NC 55 at Dakota St (SB)
+</td>
+<td style="text-align:left;">
+4731
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Angier Ave at Guthrie Ave (EB)
+</td>
+<td style="text-align:left;">
+Angier Ave at Bingham St (EB)
+</td>
+<td style="text-align:left;">
+1778
+</td>
+<td style="text-align:left;">
+East Durham-Angier Ave
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Angier Ave at Midway Ave (EB)
+</td>
+<td style="text-align:left;">
+Pleasant Dr at Angier Ave
+</td>
+<td style="text-align:left;">
+1777
+</td>
+<td style="text-align:left;">
+East Durham-Angier Ave
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Briggs Ave at Person St (SB 2)
+</td>
+<td style="text-align:left;">
+Briggs Ave at Riddle Rd (SB)
+</td>
+<td style="text-align:left;">
+1786
+</td>
+<td style="text-align:left;">
+Lawson Street - NCCU - Durham Tech
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Club Blvd at Northgate Mall
+</td>
+<td style="text-align:left;">
+W Club Blvd at Onslow St (Walltown Park)
+</td>
+<td style="text-align:left;">
+1762
+</td>
+<td style="text-align:left;">
+Northgate-North Pointe-Croasdaile Crossings-Willowdale
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Club Blvd at Northgate Mall
+</td>
+<td style="text-align:left;">
+W Club Blvd at Onslow St (Walltown Park)
+</td>
+<td style="text-align:left;">
+1774
+</td>
+<td style="text-align:left;">
+Northgate-North Pointe-Loehmanns
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Club Blvd at Northgate Mall
+</td>
+<td style="text-align:left;">
+W Club Blvd at Onslow St (Walltown Park)
+</td>
+<td style="text-align:left;">
+1775
+</td>
+<td style="text-align:left;">
+Northgate - Guess Road - Willowdale
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Durham Chapel Hill Blvd at James St
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill Blvd at Hope Valley Rd (WB)
+</td>
+<td style="text-align:left;">
+1764
+</td>
+<td style="text-align:left;">
+South Square - New Hope Commons
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Club Blvd at Miriam Cir
+</td>
+<td style="text-align:left;">
+E Club Blvd at Glenbrook Dr (SB)
+</td>
+<td style="text-align:left;">
+1787
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Foxfire - Riverview
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fayetteville Rd at Geneva Dr (NB)
+</td>
+<td style="text-align:left;">
+Fayetteville Rd at Woodcroft Pkwy (NB)
+</td>
+<td style="text-align:left;">
+1782
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fayetteville Rd at Juliette Dr (SB)
+</td>
+<td style="text-align:left;">
+Fayetteville Rd at Cook Rd (SB)
+</td>
+<td style="text-align:left;">
+1782
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+200
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fayetteville Rd at Obie Dr (NB)
+</td>
+<td style="text-align:left;">
+Fayetteville Rd at Cook Rd (NB)
+</td>
+<td style="text-align:left;">
+1782
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fayetteville Rd at United Dr
+</td>
+<td style="text-align:left;">
+Fayetteville Rd at MLK Pkwy (NB)
+</td>
+<td style="text-align:left;">
+1782
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Garrett Rd at Durham-Chapel Hill Blvd (Goodwill)
+</td>
+<td style="text-align:left;">
+Garrett Rd at Yates Baptist Association
+</td>
+<td style="text-align:left;">
+1763
+</td>
+<td style="text-align:left;">
+South Square - New Hope Commons
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Morreene Rd at American Dr (SB)
+</td>
+<td style="text-align:left;">
+Morreene Rd at Campus Walk Ave (SB)
+</td>
+<td style="text-align:left;">
+1784
+</td>
+<td style="text-align:left;">
+Duke &amp; VA Hospitals-American Village
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Residence Inn Blvd (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at The Hamptons Apts (WB)
+</td>
+<td style="text-align:left;">
+1769
+</td>
+<td style="text-align:left;">
+Hwy 54 &amp; 55 - Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at S Alston Ave (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at NC 55 (WB)
+</td>
+<td style="text-align:left;">
+4731
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Cornwallis Rd
+</td>
+<td style="text-align:left;">
+Cornwallis Rd at Laurel Oaks (NB)
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Cornwallis Rd
+</td>
+<td style="text-align:left;">
+Cornwallis Rd at Laurel Oaks (NB)
+</td>
+<td style="text-align:left;">
+4731
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Crete St
+</td>
+<td style="text-align:left;">
+NC 55 at Riddle Rd (SB)
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Odyssey Dr (NB)
+</td>
+<td style="text-align:left;">
+NC 55 at Cornwallis Rd
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Riddle Rd (NB)
+</td>
+<td style="text-align:left;">
+NC 55 at Cherry Dr
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Riddle Rd (NB)
+</td>
+<td style="text-align:left;">
+NC 55 at Cherry Dr
+</td>
+<td style="text-align:left;">
+4731
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Castle Rd at Wyldewood Rd (NB)
+</td>
+<td style="text-align:left;">
+Stadium Dr at Wyldewood Rd (NB)
+</td>
+<td style="text-align:left;">
+1787
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Foxfire - Riverview
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Castle Rd at Wyldewood Rd (NB)
+</td>
+<td style="text-align:left;">
+Stadium Dr at Wyldewood Rd (NB)
+</td>
+<td style="text-align:left;">
+1788
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Riverside HS
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Riddle Rd at Ancroft Ave (NB)
+</td>
+<td style="text-align:left;">
+Riddle Rd at Kirby St (NB)
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Alston Ave at Duke Health (NB)
+</td>
+<td style="text-align:left;">
+S Alston Ave at Capitola Dr (NB)
+</td>
+<td style="text-align:left;">
+1769
+</td>
+<td style="text-align:left;">
+Hwy 54 &amp; 55 - Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Alston Ave at Capitola Dr (SB)
+</td>
+<td style="text-align:left;">
+S Alston Ave at Duke Health (SB)
+</td>
+<td style="text-align:left;">
+1768
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Alston Ave at Capitola Dr (SB)
+</td>
+<td style="text-align:left;">
+S Alston Ave at Duke Health (SB)
+</td>
+<td style="text-align:left;">
+1769
+</td>
+<td style="text-align:left;">
+Hwy 54 &amp; 55 - Southpoint
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stadium Dr at Wyldewood Rd (SB)
+</td>
+<td style="text-align:left;">
+Chalk Level Rd at Horton Rd (EB)
+</td>
+<td style="text-align:left;">
+1787
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Foxfire - Riverview
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TW Alexander Dr at Stirrup Creek Dr
+</td>
+<td style="text-align:left;">
+TW Alexander Dr at Center Point (EB)
+</td>
+<td style="text-align:left;">
+1770
+</td>
+<td style="text-align:left;">
+TW Alexander - Brier Creek
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+US 70 at Laurel Dr
+</td>
+<td style="text-align:left;">
+US 70 at Peyton Ave (Family Dollar)
+</td>
+<td style="text-align:left;">
+1778
+</td>
+<td style="text-align:left;">
+East Durham-Angier Ave
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Renaissance Shopping Center
+</td>
+<td style="text-align:left;">
+The Streets at Southpoint
+</td>
+<td style="text-align:left;">
+1782
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:right;">
+4.42
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+<td style="text-align:right;">
+130
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Willard St at Blackwell St (South Parking Deck)
+</td>
+<td style="text-align:left;">
+GoDurham Station
+</td>
+<td style="text-align:left;">
+1763
+</td>
+<td style="text-align:left;">
+South Square - New Hope Commons
+</td>
+<td style="text-align:right;">
+4.26
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="goraleigh-gtfs-feed" class="section level2">
 <h2>GoRaleigh GTFS Feed</h2>
 <div id="high-and-low-speed-links-4" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |===== | 6% | |========== | 12% | |=============== | 18% | |==================== | 24% | |========================= | 29% | |============================== | 35% | |=================================== | 41% | |======================================== | 47% | |============================================== | 53% | |=================================================== | 59% | |======================================================== | 65% | |============================================================= | 71% | |================================================================== | 76% | |======================================================================= | 82% | |============================================================================ | 88% | |================================================================================= | 94% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-5.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-4" class="section level3">
@@ -1955,11 +3990,643 @@ Longview
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-4" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Avent Ferry Rd at Avery Close Apts
+</td>
+<td style="text-align:left;">
+Avent Ferry Rd at Crest Rd
+</td>
+<td style="text-align:left;">
+1527
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+151
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Crabtree Valley Mall
+</td>
+<td style="text-align:left;">
+Crabtree Valley Ave at Creedmoor Rd (NB)
+</td>
+<td style="text-align:left;">
+1548
+</td>
+<td style="text-align:left;">
+Crabtree
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+168
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Millbrook Rd at Quail Meadows Dr
+</td>
+<td style="text-align:left;">
+E Millbrook Rd at Tall Pines Ct
+</td>
+<td style="text-align:left;">
+1539
+</td>
+<td style="text-align:left;">
+Millbrook Connector
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Edwards Mill Rd at Ed Dr
+</td>
+<td style="text-align:left;">
+Edwards Mill Rd at Blueberry St
+</td>
+<td style="text-align:left;">
+12342
+</td>
+<td style="text-align:left;">
+Edwards Mill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+250
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Garner Rd at Peterson St (Greenway)
+</td>
+<td style="text-align:left;">
+Garner Rd at Bailey Dr (SB)
+</td>
+<td style="text-align:left;">
+1538
+</td>
+<td style="text-align:left;">
+State Street
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+296
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Western Blvd
+</td>
+<td style="text-align:left;">
+Hillsborough St at Powell Dr
+</td>
+<td style="text-align:left;">
+12343
+</td>
+<td style="text-align:left;">
+Blue Ridge
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+330
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lake Woodard Dr at Billingham Ct
+</td>
+<td style="text-align:left;">
+Lake Woodard Dr at Timberlake Apts
+</td>
+<td style="text-align:left;">
+1532
+</td>
+<td style="text-align:left;">
+Trawick Connector
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.56
+</td>
+<td style="text-align:right;">
+37
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Little John Rd at Cooper Rd
+</td>
+<td style="text-align:left;">
+Little John Rd at Weston St (WB)
+</td>
+<td style="text-align:left;">
+12329
+</td>
+<td style="text-align:left;">
+Poole-Barwell
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Midtown - North Hills Mall (North State Bank)
+</td>
+<td style="text-align:left;">
+Six Forks Rd at Rowan St
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+141
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Blount St at E Lane St
+</td>
+<td style="text-align:left;">
+N Blount St at Morgan St
+</td>
+<td style="text-align:left;">
+1524
+</td>
+<td style="text-align:left;">
+Capital Blvd
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+171
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Six Forks Rd at Sawmill Rd
+</td>
+<td style="text-align:left;">
+Six Forks Rd at Newton Rd
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+174
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Six Forks Rd at Woods Ream Dr
+</td>
+<td style="text-align:left;">
+Six Forks Rd at West Brook Dr
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+181
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Marys St at Clay St (SB)
+</td>
+<td style="text-align:left;">
+St Marys St at Peace St (SB)
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+St Marys St at North St (Wiley School)
+</td>
+<td style="text-align:left;">
+Hillsborough St at Boylan St
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Thistledown Dr at Gorman St (WB)
+</td>
+<td style="text-align:left;">
+Gorman St at Shire Ln
+</td>
+<td style="text-align:left;">
+1527
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+151
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Triangle Town Center Mall at Orvis (Park and Ride)
+</td>
+<td style="text-align:left;">
+Triangle Town Center Blvd at Sumner Blvd
+</td>
+<td style="text-align:left;">
+1541
+</td>
+<td style="text-align:left;">
+Triangle Town Link
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tryon Rd at Tryon Grove Dr
+</td>
+<td style="text-align:left;">
+Tryon Rd at Trailwood Dr
+</td>
+<td style="text-align:left;">
+1527
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+187
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Lenoir St at S Salisbury St
+</td>
+<td style="text-align:left;">
+W Lenoir St at S West St
+</td>
+<td style="text-align:left;">
+1527
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W Millbrook Rd at Dixon Dr
+</td>
+<td style="text-align:left;">
+W Millbrook Rd at Snelling Rd
+</td>
+<td style="text-align:left;">
+1539
+</td>
+<td style="text-align:left;">
+Millbrook Connector
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wake Forest Rd at Hodges St (NB)
+</td>
+<td style="text-align:left;">
+Wake Forest Rd at Six Forks Rd (Costco)
+</td>
+<td style="text-align:left;">
+1536
+</td>
+<td style="text-align:left;">
+Falls of Neuse
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+194
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wake Forest Rd at Wake Towne Dr (SB)
+</td>
+<td style="text-align:left;">
+Wake Forest Rd at Six Forks Rd (Creekside Crossing)
+</td>
+<td style="text-align:left;">
+1536
+</td>
+<td style="text-align:left;">
+Falls of Neuse
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Glenwood Ave at Munford Rd (SB)
+</td>
+<td style="text-align:left;">
+Crabtree Valley Mall
+</td>
+<td style="text-align:left;">
+1550
+</td>
+<td style="text-align:left;">
+Brier Creek Express
+</td>
+<td style="text-align:right;">
+108.28
+</td>
+<td style="text-align:right;">
+1.80
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Bern Ave at Trawick Rd (WB)
+</td>
+<td style="text-align:left;">
+New Bern Ave at WakeMed (WB)
+</td>
+<td style="text-align:left;">
+1531
+</td>
+<td style="text-align:left;">
+WakeMed
+</td>
+<td style="text-align:right;">
+67.54
+</td>
+<td style="text-align:right;">
+1.13
+</td>
+<td style="text-align:right;">
+376
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Horne St (EB)
+</td>
+<td style="text-align:left;">
+Oberlin Rd at Stafford Ave
+</td>
+<td style="text-align:left;">
+1529
+</td>
+<td style="text-align:left;">
+Method
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+147
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Green Rd at Greenock Dr (NB)
+</td>
+<td style="text-align:left;">
+Green Rd at Kilcullen Dr
+</td>
+<td style="text-align:left;">
+1540
+</td>
+<td style="text-align:left;">
+North Crosstown Connector
+</td>
+<td style="text-align:right;">
+3.20
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Union Station
+</td>
+<td style="text-align:left;">
+GoRaleigh Station
+</td>
+<td style="text-align:left;">
+1552
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:right;">
+2.53
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="gotriangle-gtfs-feed" class="section level2">
 <h2>GoTriangle GTFS Feed</h2>
 <div id="high-and-low-speed-links-5" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |======= | 8% | |============== | 17% | |====================== | 25% | |============================= | 33% | |==================================== | 42% | |=========================================== | 50% | |================================================== | 58% | |========================================================= | 67% | |================================================================ | 75% | |======================================================================== | 83% | |=============================================================================== | 92% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-6.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-5" class="section level3">
@@ -2284,11 +4951,1862 @@ Regional Transit Center-Cary-Raleigh
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-5" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3025 Carrington Mill Blvd (ChannelAdvisor)
+</td>
+<td style="text-align:left;">
+Carrington Mill Blvd at Paramount Pkwy (SB)
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Blue Ridge Rd at Trinity Rd (State Fairgrounds)
+</td>
+<td style="text-align:left;">
+Hillsborough St at NCSU Veterinary School (EB)
+</td>
+<td style="text-align:left;">
+1556
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buck Jones Rd at Farm Gate Rd (EB)
+</td>
+<td style="text-align:left;">
+Buck Jones Rd at Bashford Rd
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buck Jones Rd at Fieldspring Ln
+</td>
+<td style="text-align:left;">
+Western Blvd at Hunt Club Ln
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buck Jones Rd at Orchard St
+</td>
+<td style="text-align:left;">
+Buck Jones Rd at Barclay Dr (WB)
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cary Depot
+</td>
+<td style="text-align:left;">
+Harrison Ave at Johnson St (NB)
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Couch Rd (Franklin Woods)
+</td>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (WB)
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Elizabeth St (WB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Carolina Ave
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.42
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+E Franklin St at Couch Rd (EB)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Estes Dr (Caribou Coffee)
+</td>
+<td style="text-align:left;">
+E Franklin St at Couch Rd (EB)
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at Morehead Planetarium (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Davie Cir
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E Franklin St at S Boundary St (EB)
+</td>
+<td style="text-align:left;">
+E Franklin St at Davie Cir
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Emperor Blvd at Yorkshire Place
+</td>
+<td style="text-align:left;">
+Emperor Blvd at S Miami Blvd (Royal Center)
+</td>
+<td style="text-align:left;">
+1564
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Cameron Blvd (NB)
+</td>
+<td style="text-align:left;">
+Erwin Rd at Towerview Rd
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+101
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Cameron Blvd (NB)
+</td>
+<td style="text-align:left;">
+Erwin Rd at Towerview Rd
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Downing St (EB)
+</td>
+<td style="text-align:left;">
+Erwin Rd at Fulton St (Duke University Hospital)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Fulton St (VA Hospital)
+</td>
+<td style="text-align:left;">
+Erwin Rd at Downing St (WB)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+221
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Fulton St (VA Hospital)
+</td>
+<td style="text-align:left;">
+Erwin Rd at Downing St (WB)
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Lambeth Cir
+</td>
+<td style="text-align:left;">
+Erwin Rd at Morreene Rd
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+173
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Lambeth Cir
+</td>
+<td style="text-align:left;">
+Erwin Rd at Morreene Rd
+</td>
+<td style="text-align:left;">
+1566
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Morreene Rd
+</td>
+<td style="text-align:left;">
+Erwin Rd at Cameron Blvd (SB)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Erwin Rd at Towerview Rd
+</td>
+<td style="text-align:left;">
+Erwin Rd at LaSalle St (EB)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+76
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harrison Ave at NE Maynard Rd (NB)
+</td>
+<td style="text-align:left;">
+N Harrison Ave at Harrison Pointe Dr
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harrison Ave at Queen Elizabeth Dr (NB)
+</td>
+<td style="text-align:left;">
+Harrison Ave at NE Maynard Rd (NB)
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Faircloth St
+</td>
+<td style="text-align:left;">
+Hillsborough St at Meredith College (WB)
+</td>
+<td style="text-align:left;">
+1556
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Meredith College (EB)
+</td>
+<td style="text-align:left;">
+Hillsborough St at Turner St
+</td>
+<td style="text-align:left;">
+1556
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Shepherd St
+</td>
+<td style="text-align:left;">
+Hillsborough St at Faircloth St
+</td>
+<td style="text-align:left;">
+1556
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+213
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Franklin Rd at Capital Center Dr (EB)
+</td>
+<td style="text-align:left;">
+Jones Franklin Rd at Waters Edge Dr
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Franklin Rd at Crossroads Blvd (NB)
+</td>
+<td style="text-align:left;">
+Jones Franklin Rd at Wayne St
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Jones Franklin Rd at Woodsdale Rd
+</td>
+<td style="text-align:left;">
+Jones Franklin Rd at Crossroads Blvd (SB)
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Harrison Ave at Dynasty Dr (SB)
+</td>
+<td style="text-align:left;">
+N Harrison Ave at Harrison Grande Dr
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Harrison Ave at Harrison Pointe Dr
+</td>
+<td style="text-align:left;">
+N Harrison Ave at Dynasty Dr (NB)
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Boulder Rd (EB)
+</td>
+<td style="text-align:left;">
+NC 54 at Amhurst St (EB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Boulder Rd (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at Fayetteville Rd (Duke Health)
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Boulder Rd (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at Fayetteville Rd (Duke Health)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Residence Inn Blvd (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at The Hamptons Apts (WB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at S Alston Ave (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at NC 55 (WB)
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at S Alston Ave (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at NC 55 (WB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Seasons of Southpoint (EB)
+</td>
+<td style="text-align:left;">
+NC 54 at Barbee Rd (EB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+42
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 54 at Triangle Dr (WB)
+</td>
+<td style="text-align:left;">
+NC 54 at S Alston Ave (WB)
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Colony Woods Dr (NB)
+</td>
+<td style="text-align:left;">
+NC 55 at Old Jenks Rd
+</td>
+<td style="text-align:left;">
+1564
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Colony Woods Dr (SB)
+</td>
+<td style="text-align:left;">
+NC 55 at Vision Dr (SB)
+</td>
+<td style="text-align:left;">
+1564
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at High House Rd
+</td>
+<td style="text-align:left;">
+NC 55 at Connemara Dr
+</td>
+<td style="text-align:left;">
+1564
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 55 at Lewey Dr
+</td>
+<td style="text-align:left;">
+NC 55 at Parkscene Ln
+</td>
+<td style="text-align:left;">
+1564
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh at Burning Tree
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh at Burning Tree
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Glen Lennox Shopping Center
+</td>
+<td style="text-align:left;">
+4772
+</td>
+<td style="text-align:left;">
+Southpoint-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Raleigh Rd at UNC Administration (EB)
+</td>
+<td style="text-align:left;">
+Raleigh Rd at Hamilton Rd
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S Person St at Bledsoe Ave
+</td>
+<td style="text-align:left;">
+S Person St at Lenoir St
+</td>
+<td style="text-align:left;">
+1806
+</td>
+<td style="text-align:left;">
+Raleigh-Garner (operated by GoRaleigh)
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salisbury St at W Morgan St
+</td>
+<td style="text-align:left;">
+Salisbury St at W Davie St
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salisbury St at W Morgan St
+</td>
+<td style="text-align:left;">
+Salisbury St at W Davie St
+</td>
+<td style="text-align:left;">
+1810
+</td>
+<td style="text-align:left;">
+Fuquay-Varina - Raleigh Express (operated by GoRaleigh)
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.31
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Slater Rd at Sheraton Hotel
+</td>
+<td style="text-align:left;">
+Emperor Blvd at Yorkshire Place
+</td>
+<td style="text-align:left;">
+13513
+</td>
+<td style="text-align:left;">
+North Raleigh Express
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+218
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+South Rd at Country Club Rd (EB)
+</td>
+<td style="text-align:left;">
+4772
+</td>
+<td style="text-align:left;">
+Southpoint-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SW Durham Dr at Realm Homes (SB)
+</td>
+<td style="text-align:left;">
+SW Durham Dr at Rose Garden Ln (SB)
+</td>
+<td style="text-align:left;">
+1565
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Streets at Southpoint
+</td>
+<td style="text-align:left;">
+Renaissance Pkwy at Renaissance Village
+</td>
+<td style="text-align:left;">
+1573
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Gannett St
+</td>
+<td style="text-align:left;">
+Western Blvd at Powell Dr
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Gannett St
+</td>
+<td style="text-align:left;">
+Western Blvd at Powell Dr
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Gannett St
+</td>
+<td style="text-align:left;">
+Western Blvd at Powell Dr
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Gorman St (WB)
+</td>
+<td style="text-align:left;">
+Western Blvd at Method Rd
+</td>
+<td style="text-align:left;">
+1560
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Gorman St (WB)
+</td>
+<td style="text-align:left;">
+Western Blvd at Method Rd
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Heather Dr
+</td>
+<td style="text-align:left;">
+Western Blvd at Deboy St
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Hunt Club Ln
+</td>
+<td style="text-align:left;">
+Western Blvd at Heather Dr
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Hunt Club Ln
+</td>
+<td style="text-align:left;">
+Western Blvd at Heather Dr
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Hunt Dr (EB)
+</td>
+<td style="text-align:left;">
+Western Blvd at Boylan Ave (EB)
+</td>
+<td style="text-align:left;">
+1561
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Western Blvd at Kent Rd
+</td>
+<td style="text-align:left;">
+Western Blvd at Gorman St (EB)
+</td>
+<td style="text-align:left;">
+1563
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Woodcroft Pkwy at Autumn Woods Dr
+</td>
+<td style="text-align:left;">
+Woodcroft Pkwy at Sandstone Ridge Dr (WB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Woodcroft Pkwy at Old Fox Trail
+</td>
+<td style="text-align:left;">
+Woodcroft Pkwy at Weathersfield Dr (EB)
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Woodcroft Shopping Center (EB)
+</td>
+<td style="text-align:left;">
+Woodcroft Pkwy at Winterberry Ridge Dr
+</td>
+<td style="text-align:left;">
+1574
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Chapel Hill North (SB)
+</td>
+<td style="text-align:left;">
+Martin Luther King Jr Blvd at Airport Dr
+</td>
+<td style="text-align:left;">
+1568
+</td>
+<td style="text-align:left;">
+Hillsborough-Chapel Hill (operated by Chapel Hill Transit)
+</td>
+<td style="text-align:right;">
+141.14
+</td>
+<td style="text-align:right;">
+2.35
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 86 at Storey Ln (Southbound)
+</td>
+<td style="text-align:left;">
+NC 86 at Millhouse Rd (Southbound)
+</td>
+<td style="text-align:left;">
+3108
+</td>
+<td style="text-align:left;">
+Orange - Chapel Hill Connector - 420 Midday (Orange Public Transportation)
+</td>
+<td style="text-align:right;">
+75.38
+</td>
+<td style="text-align:right;">
+2.51
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 86 at Mt. Sinai Rd
+</td>
+<td style="text-align:left;">
+NC 86 at Storey Ln (Northbound)
+</td>
+<td style="text-align:left;">
+1568
+</td>
+<td style="text-align:left;">
+Hillsborough-Chapel Hill (operated by Chapel Hill Transit)
+</td>
+<td style="text-align:right;">
+75.30
+</td>
+<td style="text-align:right;">
+2.51
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NC 86 at Mt. Sinai Rd
+</td>
+<td style="text-align:left;">
+NC 86 at Storey Ln (Northbound)
+</td>
+<td style="text-align:left;">
+3108
+</td>
+<td style="text-align:left;">
+Orange - Chapel Hill Connector - 420 Midday (Orange Public Transportation)
+</td>
+<td style="text-align:right;">
+75.30
+</td>
+<td style="text-align:right;">
+2.51
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N Columbia St at W Franklin St
+</td>
+<td style="text-align:left;">
+South Rd at Fetzer Gym
+</td>
+<td style="text-align:left;">
+1754
+</td>
+<td style="text-align:left;">
+Chapel Hill-Raleigh Express
+</td>
+<td style="text-align:right;">
+4.58
+</td>
+<td style="text-align:right;">
+0.53
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trent Dr at Duke Hospital South (WB)
+</td>
+<td style="text-align:left;">
+Fulton St at Erwin Rd (Duke Hospital Parking Garage)
+</td>
+<td style="text-align:left;">
+1755
+</td>
+<td style="text-align:left;">
+Durham-Raleigh Express
+</td>
+<td style="text-align:right;">
+4.51
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Enterprise St (NCSU Bell Tower)
+</td>
+<td style="text-align:left;">
+Hillsborough St at Forest Rd (EB)
+</td>
+<td style="text-align:left;">
+1556
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:right;">
+4.40
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Rd at Student Stores
+</td>
+<td style="text-align:left;">
+N Columbia St at Rosemary St
+</td>
+<td style="text-align:left;">
+1754
+</td>
+<td style="text-align:left;">
+Chapel Hill-Raleigh Express
+</td>
+<td style="text-align:right;">
+4.05
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trent Dr at Duke Hospital South (EB)
+</td>
+<td style="text-align:left;">
+Chapel Dr at Duke University Rd (Alumni House)
+</td>
+<td style="text-align:left;">
+1755
+</td>
+<td style="text-align:left;">
+Durham-Raleigh Express
+</td>
+<td style="text-align:right;">
+4.00
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="ncsu-wolfline-gtfs-feed" class="section level2">
 <h2>NCSU Wolfline GTFS Feed</h2>
 <div id="high-and-low-speed-links-6" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |==== | 5% | |========= | 10% | |============= | 15% | |================= | 20% | |====================== | 25% | |========================== | 30% | |============================== | 35% | |================================== | 40% | |======================================= | 45% | |=========================================== | 50% | |=============================================== | 55% | |==================================================== | 60% | |======================================================== | 65% | |============================================================ | 70% | |================================================================ | 75% | |===================================================================== | 80% | |========================================================================= | 85% | |============================================================================= | 90% | |================================================================================== | 95% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-7.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-6" class="section level3">
@@ -2549,11 +7067,275 @@ Centennial Night
 </tbody>
 </table>
 </div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-6" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Centennial Pkwy at Mission Valley Apartments
+</td>
+<td style="text-align:left;">
+Oval Dr at Main Campus Dr
+</td>
+<td style="text-align:left;">
+1603
+</td>
+<td style="text-align:left;">
+Southeast Loop
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.36
+</td>
+<td style="text-align:right;">
+95
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sullivan Dr at Lee Lot
+</td>
+<td style="text-align:left;">
+Sullivan Dr at Admin Services (WB)
+</td>
+<td style="text-align:left;">
+1597
+</td>
+<td style="text-align:left;">
+Wolflink Reverse
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+0.26
+</td>
+<td style="text-align:right;">
+176
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greek Village (Outbound)
+</td>
+<td style="text-align:left;">
+Dan Allen Dr at Hodges Bldg
+</td>
+<td style="text-align:left;">
+1604
+</td>
+<td style="text-align:left;">
+Gorman Street
+</td>
+<td style="text-align:right;">
+4.97
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+260
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Avent Ferry Rd at Centennial Pkwy (Burger King)
+</td>
+<td style="text-align:left;">
+Dan Allen Dr at Hodges Bldg
+</td>
+<td style="text-align:left;">
+1594
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:right;">
+4.78
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wolf Ridge at Initiative Way (NB)
+</td>
+<td style="text-align:left;">
+Barbour Dr at Spring Hill Lot
+</td>
+<td style="text-align:left;">
+9881
+</td>
+<td style="text-align:left;">
+Spring Hill
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+309
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hillsborough St at Friendly Dr
+</td>
+<td style="text-align:left;">
+Scott Hall - Platform B
+</td>
+<td style="text-align:left;">
+1601
+</td>
+<td style="text-align:left;">
+Carter Finley
+</td>
+<td style="text-align:right;">
+4.34
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+115
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Morrill Dr at Faucette Dr
+</td>
+<td style="text-align:left;">
+Varsity Dr at McKimmon Center (East side)
+</td>
+<td style="text-align:left;">
+1600
+</td>
+<td style="text-align:left;">
+Varsity
+</td>
+<td style="text-align:right;">
+4.34
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gorman St at Kings Ct (SB)
+</td>
+<td style="text-align:left;">
+Greek Way at Avent Ferry Rd
+</td>
+<td style="text-align:left;">
+1604
+</td>
+<td style="text-align:left;">
+Gorman Street
+</td>
+<td style="text-align:right;">
+4.06
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cates Ave at Jensen Dr (EB)
+</td>
+<td style="text-align:left;">
+Stinson Dr at Boney Dr (Leazar Hall)
+</td>
+<td style="text-align:left;">
+1597
+</td>
+<td style="text-align:left;">
+Wolflink Reverse
+</td>
+<td style="text-align:right;">
+3.28
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sullivan Dr at Admin Services (WB)
+</td>
+<td style="text-align:left;">
+Gorman St at Jackson St (King Village)
+</td>
+<td style="text-align:left;">
+3562
+</td>
+<td style="text-align:left;">
+RS Lot Shuttle
+</td>
+<td style="text-align:right;">
+2.65
+</td>
+<td style="text-align:right;">
+0.27
+</td>
+<td style="text-align:right;">
+108
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="piedmont-authority-for-regional-transportation-gtfs-feed" class="section level2">
 <h2>Piedmont Authority for Regional Transportation GTFS Feed</h2>
 <div id="high-and-low-speed-links-7" class="section level3">
 <h3>High and Low Speed Links</h3>
+<div class="line-block"></div>
+<div class="line-block">                                                                                     | 0% | |=== | 3% | |====== | 7% | |========= | 10% | |=========== | 13% | |============== | 17% | |================= | 20% | |==================== | 23% | |======================= | 27% | |========================== | 30% | |============================= | 33% | |================================ | 37% | |================================== | 40% | |===================================== | 43% | |======================================== | 47% | |=========================================== | 50% | |============================================== | 53% | |================================================= | 57% | |==================================================== | 60% | |====================================================== | 63% | |========================================================= | 67% | |============================================================ | 70% | |=============================================================== | 73% | |================================================================== | 77% | |===================================================================== | 80% | |======================================================================== | 83% | |=========================================================================== | 87% | |============================================================================= | 90% | |================================================================================ | 93% | |=================================================================================== | 97% | |======================================================================================| 100%</div>
 <p><img src="service_speed_analysis_files/figure-html/unnamed-chunk-1-8.png" width="960" /> *Infinite values represented as 99 in map.</p>
 </div>
 <div id="miles-per-route-of-segments-with-60mph-speed-7" class="section level3">
@@ -2609,6 +7391,84 @@ Surry County Express
 </td>
 <td style="text-align:right;">
 0.3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="all-stop-to-stop-segments-14-mile-with-high-or-low-speeds-7" class="section level3">
+<h3>All Stop-to-Stop Segments &gt; 1/4 mile with High or Low Speeds</h3>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+from_stop_name
+</th>
+<th style="text-align:left;">
+to_stop_name
+</th>
+<th style="text-align:left;">
+route_id
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:right;">
+max_mph
+</th>
+<th style="text-align:right;">
+max_distance_miles
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pilot Mountain Park &amp; Ride 2
+</td>
+<td style="text-align:left;">
+King Park &amp; Ride
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Surry County Express
+</td>
+<td style="text-align:right;">
+78.32
+</td>
+<td style="text-align:right;">
+10.44
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pilot Mountain Park &amp; Ride 1
+</td>
+<td style="text-align:left;">
+Pilot Mountain Park &amp; Ride 2
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Surry County Express
+</td>
+<td style="text-align:right;">
+4.49
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+6
 </td>
 </tr>
 </tbody>
