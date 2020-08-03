@@ -14,6 +14,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Findings"
+      href: findings.html    
     - text: "Routes & Schedule Analysis"
       href: schedule_analysis.html
     - text: "Feed Validation"
@@ -22,5 +24,3 @@ navbar:
       href: frequency_analysis.html
     - text: "Speed Analysis"
       href: service_speed_analysis.html
-    - text: "Findings"
-      href: findings.html     

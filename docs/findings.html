@@ -351,6 +351,9 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
+  <a href="findings.html">Findings</a>
+</li>
+<li>
   <a href="schedule_analysis.html">Routes &amp; Schedule Analysis</a>
 </li>
 <li>
@@ -361,9 +364,6 @@ div.tocify {
 </li>
 <li>
   <a href="service_speed_analysis.html">Speed Analysis</a>
-</li>
-<li>
-  <a href="findings.html">Findings</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -382,7 +382,57 @@ div.tocify {
 </div>
 
 
-<p>This page will contain findings from the analysis.</p>
+<div id="summary-of-findings" class="section level2">
+<h2>Summary of Findings</h2>
+<p>This analysis did not uncover any major issues that will result in dramatically inaccurate representation of service based on the GTFS feeds included in this analysis. It did, however, uncover some low to medium level issues that should be considered and/or addressed before GTFS feeds are used to inform planning analyses. These findings are reviewed below, and are based on the subsequent pages on this site.</p>
+</div>
+<div id="route-schedule-findings" class="section level2">
+<h2>Route Schedule Findings</h2>
+<p>It is vital that GTFS schedules and service patterns accurately reflect existing transit service. This is particularly important when an analysis is run for a specific day or weekday, as various coding irregularities can impact service on any given day day. This analysis reviews explores a series of GTFS characteristics than can lead to under or over coding of service. In</p>
+<div id="all-except-for-part" class="section level4">
+<h4>All Except for PART</h4>
+<ul>
+<li>In all of the feeds the “feed_info.txt” file contains inaccurate start _feed_date and feed_end_date values, in that they do not align with the dates identified under service patterns by service_ID analysis. While the file is required for all GTFS feeds, the fields are optional. Therefore, While it is likely the dates will not impact an analysis, an analyst should verify that this is the case when any analysis is run using the feeds.</li>
+</ul>
+</div>
+<div id="academic-calendar-and-special-event-considerations" class="section level4">
+<h4>Academic Calendar and Special Event Considerations</h4>
+<ul>
+<li>Most feeds include service characteristics that vary based on an academic calendar. Further, some include speThis is an important considerating in sellecting which day to analyze transit service.</li>
+</ul>
+</div>
+<div id="ncsu-wolfline-staff-only-service" class="section level4">
+<h4>NCSU Wolfline Staff-Only Service</h4>
+<ul>
+<li>This feed contains service that is flagged as “Limited Faculty/Staff Service (Weekday).” Special consideration should be used in deciding whether this service should be included in an analysis.</li>
+</ul>
+</div>
+<div id="part" class="section level4">
+<h4>PART</h4>
+<ul>
+<li><a href="https://www.partnc.org/170/Route-4">Piedmont Authority for Regional Transportation Route 4</a> does not appear as a route in the GTFS feed included in this analysis. The Almance Burlingting Express provides service from Chapel Hill to Greensboro, making intermediate stops. The PART website as of July 29, 2020, notes that “Effective March 25, 2020: This route has been suspended until Monday, August 3rd.” Service typically operates Monday through Friday, with eight deparutres per day. This service should likely be included in any analysis. It may be necessary to obtain an archived feed in order to accurately represent this peticular route.</li>
+</ul>
+</div>
+</div>
+<div id="feed-validation-findings" class="section level2">
+<h2>Feed Validation Findings</h2>
+<ul>
+<li>No required fields are missing from the required files that make up a GTFS feed.</li>
+</ul>
+</div>
+<div id="frequency-findings" class="section level2">
+<h2>Frequency Findings</h2>
+<ul>
+<li>The service frequency analysis by station does not reveal any significant findings that require feed adjustments.</li>
+</ul>
+</div>
+<div id="speed-findings" class="section level2">
+<h2>Speed Findings</h2>
+<ul>
+<li><p>It is common for feeds to contain segments where service is scheduled at a very high or low rate. This can occur for a variety of reasons, including schedule padding. Not all high or low speeds are a sign of a potential problem. However, at times, they can reveal schedules that inaccurately reflect service. While all feeds in this analysis include some segments with unusually high or low speeds, most appear to be minor artifacts that will not impact an analysis.</p></li>
+<li><p>The PART feed contains just over 10 miles of segments where the Surry County Express is scheduled service must maintain at least 60 mph in order to maintain the scheduled arrivals. However, as this feed is on the northwestern area of Winston-Salem, it is outside the study area and unlikely to significantly impact any analysis of the Orange County area.</p></li>
+</ul>
+</div>
 
 
 
