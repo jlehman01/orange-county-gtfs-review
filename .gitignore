@@ -50,3 +50,4 @@ findings.Rmd
 .Renviron
 _site.yml
 build_site.R
+/rosm.cache/

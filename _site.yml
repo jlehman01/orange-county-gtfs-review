@@ -9,6 +9,7 @@ output:
     toc: true
     toc_float: true
     toc_depth: 2
+    css: theme.css
 navbar:  
   title: "Orange County GTFS QA/QC"
   left:
