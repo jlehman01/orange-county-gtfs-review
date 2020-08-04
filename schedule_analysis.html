@@ -1,0 +1,6054 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Schedule Analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="theme.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Orange County GTFS QA/QC</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="findings.html">Findings</a>
+</li>
+<li>
+  <a href="schedule_analysis.html">Routes &amp; Schedule Analysis</a>
+</li>
+<li>
+  <a href="validation.html">Feed Validation</a>
+</li>
+<li>
+  <a href="frequency_analysis.html">Frequency Analysis</a>
+</li>
+<li>
+  <a href="service_speed_analysis.html">Speed Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Schedule Analysis</h1>
+
+</div>
+
+
+<p>The tables and charts presented on this page provide a look at the scheduling information contained in each GTFS feed. These tables are intended to assist an analysis in understanding service patterns to ensure that they are accurate. This information is also helpful in ensuring that overlapping schedules are not computed, resulting in duplicate service findings.</p>
+<div id="chapel-hill-transit-gtfs-feed" class="section level2">
+<h2>Chapel Hill Transit GTFS Feed</h2>
+<div id="agency-information" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+243
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.chtransit.org" class="uri">http://www.chtransit.org</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+Chapel Hill Transit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 13-Sep-2019 20:50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+chapel-hill-transit-nc-us@trilliumtransit.com" class="email">support+chapel-hill-transit-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190913
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+chapel-hill-transit-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-1.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+Baity Hill - UNC Hospitals - Fetzer Gym
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+Booker Creek-University Place-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:left;">
+Culbreth Road - Franklin Street - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JN - Saturday
+</td>
+<td style="text-align:left;">
+Estes Park-UNC Hospitals-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NS
+</td>
+<td style="text-align:left;">
+Eubanks Road-Southern Village
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride J
+</td>
+<td style="text-align:left;">
+Franklin Street-Carrboro-Rock Haven Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride G
+</td>
+<td style="text-align:left;">
+Franklin Street-Finley Forest-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Safe Ride T
+</td>
+<td style="text-align:left;">
+Franklin Street-MLK Jr Boulevard-Timberlyne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FG - Saturday
+</td>
+<td style="text-align:left;">
+Franklin St-University Place-Colony Woods
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FCX
+</td>
+<td style="text-align:left;">
+Friday Center Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D - Saturday
+</td>
+<td style="text-align:left;">
+Greenbridge - University Place - Eastowne
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RU
+</td>
+<td style="text-align:left;">
+Campus Reverse Shuttle-Law School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+JFX
+</td>
+<td style="text-align:left;">
+Jones Ferry Road Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+MLK Jr Blvd - Northside
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T - Saturday
+</td>
+<td style="text-align:left;">
+MLK Jr Boulevard-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HS
+</td>
+<td style="text-align:left;">
+Morris Grove Elementary-Chapel Hill High-Rogers Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NU
+</td>
+<td style="text-align:left;">
+RR Lot-UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+S
+</td>
+<td style="text-align:left;">
+South Campus-NC 54 Park-&amp;-Ride
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V
+</td>
+<td style="text-align:left;">
+Southern Village-Meadowmont
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:left;">
+UNC Campus Shuttle-Downtown
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+J
+</td>
+<td style="text-align:left;">
+Carrboro-Downtown Chapel Hill-Jones Ferry Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HU
+</td>
+<td style="text-align:left;">
+UNC Hospitals-Botanical Garden-54 Park and Ride-Hendrick Building
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CM
+</td>
+<td style="text-align:left;">
+Carrboro-Merritt Mill Road-Family Medicine
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CPX
+</td>
+<td style="text-align:left;">
+Carrboro Plaza Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CW
+</td>
+<td style="text-align:left;">
+Carrboro - Weaver Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CCX
+</td>
+<td style="text-align:left;">
+Chatham County Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CL
+</td>
+<td style="text-align:left;">
+Colony Lake - Sage Rd - UNC Hospitals
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+Colony Woods - Franklin Street - McDougle School
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+V - Saturday
+</td>
+<td style="text-align:left;">
+Southern Village - Meadowmont
+</td>
+<td style="text-align:left;">
+New route connecting Southern Village and Meadowmont to main campus and UNC Hospitals on Saturdays.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-2.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_930_b_21795_d_96
+</td>
+<td style="text-align:left;">
+U &amp; NU WKND (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_929_b_21727_d_56
+</td>
+<td style="text-align:left;">
+SAFE RIDES (ThFSa)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_96
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_927_b_19747_d_31
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR - NU (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21732_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21729_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_32
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_782_b_21728_d_31
+</td>
+<td style="text-align:left;">
+YEAR-ROUND CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21731_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_6100_b_21730_d_31
+</td>
+<td style="text-align:left;">
+CHT EXPRESS (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15981_b_17467_d_31
+</td>
+<td style="text-align:left;">
+HALLOWEEN (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="duke-transit-gtfs-feed" class="section level2">
+<h2>Duke Transit GTFS Feed</h2>
+<div id="agency-information-1" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+240
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://parking.duke.edu/" class="uri">http://parking.duke.edu/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+Duke Transit
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+<ol start="919" style="list-style-type: decimal">
+<li>684-2218
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+<div id="gtfs-feed-information-1" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 30-Aug-2019 18:53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+duke-nc-us@trilliumtransit.com" class="email">support+duke-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190830
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+duke-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-1" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-3.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-1" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+PR1
+</td>
+<td style="text-align:left;">
+Bassett-Research
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H2
+</td>
+<td style="text-align:left;">
+Hospital Loop
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LL
+</td>
+<td style="text-align:left;">
+LaSalle Loop
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H6
+</td>
+<td style="text-align:left;">
+Remote Lot-Hospital
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C1S
+</td>
+<td style="text-align:left;">
+East-West-Smith Warehouse
+</td>
+<td style="text-align:left;">
+New route for May 2019
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H5
+</td>
+<td style="text-align:left;">
+Broad-Erwin
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SWS
+</td>
+<td style="text-align:left;">
+Swift Avenue Shuttle
+</td>
+<td style="text-align:left;">
+New route for May 2019
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C1X
+</td>
+<td style="text-align:left;">
+East-West Express
+</td>
+<td style="text-align:left;">
+During the fall and spring semesters, C1: East-West Express provides service between East and West Campuses at 6-minute intervals with no stops on Campus Drive, conditions permitting. The route begins and ends on East Campus and operates one bus every 6 minutes from East to West Campuses from 8 a.m. to 5 p.m., Monday through Friday.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C3
+</td>
+<td style="text-align:left;">
+Class Change
+</td>
+<td style="text-align:left;">
+Tripper service for the C3 on Mondays-to-Fridays. These class change buses begin at East Campus Quad, stop at Swift Avenue at Hull, then head straight to Science Drive. All C3 buses return stops from Science Drive to East Campus.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C3
+</td>
+<td style="text-align:left;">
+East-Science
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C1
+</td>
+<td style="text-align:left;">
+East-West
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-1" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-4.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-1" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_883_b_21967_d_31
+</td>
+<td style="text-align:left;">
+LL HOLIDAY (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_876_b_21969_d_31
+</td>
+<td style="text-align:left;">
+H2 &amp; H5 &amp; H6 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_876_b_20027_d_31
+</td>
+<td style="text-align:left;">
+H2 &amp; H5 &amp; H6 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_853_b_19828_d_7
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR (MTuW)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_853_b_19828_d_64
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_853_b_19828_d_32
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_853_b_19828_d_31
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_853_b_19828_d_24
+</td>
+<td style="text-align:left;">
+ACADEMIC CALENDAR (ThF)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_839_b_20026_d_31
+</td>
+<td style="text-align:left;">
+PR1 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15940_b_22111_d_31
+</td>
+<td style="text-align:left;">
+LL ROUTE (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="gocary-gtfs-feed" class="section level2">
+<h2>GoCary GTFS Feed</h2>
+<div id="agency-information-2" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+242
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.townofcary.org/Departments/fdts/trafficandtransportation/GoCary.htm" class="uri">http://www.townofcary.org/Departments/fdts/trafficandtransportation/GoCary.htm</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+GoCary
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+<ol start="919" style="list-style-type: decimal">
+<li>485-7433
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.townofcary.org/Departments/fdts/trafficandtransportation/GoCary/fixedroute/faresandtickets.htm" class="uri">http://www.townofcary.org/Departments/fdts/trafficandtransportation/GoCary/fixedroute/faresandtickets.htm</a>
+</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+<div id="gtfs-feed-information-2" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 15-Apr-2019 20:36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+cary-transit-nc-us@trilliumtransit.com" class="email">support+cary-transit-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190415
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191127
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+cary-transit-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-2" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-5.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-2" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Buck Jones Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Harrison Avenue
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+High House Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Kildaire Farm Road
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:left;">
+Kildaire Farm Road Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Maynard Rd (Counterclockwise)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Maynard Road (Clockwise)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-2" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-6.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-2" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_781_b_17692_d_64
+</td>
+<td style="text-align:left;">
+Year-round calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17692_d_63
+</td>
+<td style="text-align:left;">
+Year-round calendar (Monday-Saturday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17692_d_32
+</td>
+<td style="text-align:left;">
+Year-round calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17692_d_31
+</td>
+<td style="text-align:left;">
+Year-round calendar (Monday-Friday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17689_d_64
+</td>
+<td style="text-align:left;">
+Year-round calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17689_d_63
+</td>
+<td style="text-align:left;">
+Year-round calendar (Monday-Saturday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17689_d_32
+</td>
+<td style="text-align:left;">
+Year-round calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_781_b_17689_d_31
+</td>
+<td style="text-align:left;">
+Year-round calendar (Monday-Friday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="godurham-gtfs-feed" class="section level2">
+<h2>GoDurham GTFS Feed</h2>
+<div id="agency-information-3" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+241
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://godurhamtransit.org/" class="uri">http://godurhamtransit.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+GoDurham
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information-3" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 13-Sep-2019 20:46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+durham-area-transit-authority-nc-us@trilliumtransit.com" class="email">support+durham-area-transit-authority-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190913
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+durham-area-transit-authority-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-3" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-7.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-3" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3T
+</td>
+<td style="text-align:left;">
+3Tripper The Village - Glenview Station
+</td>
+<td style="text-align:left;">
+Extra night service Monday through Saturday, and extra day service on Sundays for the Route 3.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2A
+</td>
+<td style="text-align:left;">
+East Durham-Angier Ave
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2B
+</td>
+<td style="text-align:left;">
+East Durham-The Village
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Fayetteville St-NCCU-Southpoint
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5K
+</td>
+<td style="text-align:left;">
+Fayetteville Street Tripper
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+Forest Hills-Weaver Street-MLK Jr Pkwy
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+Hwy 54 &amp; 55 - Southpoint
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+Lawson Street - NCCU - Durham Tech
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12B
+</td>
+<td style="text-align:left;">
+NCCU - Hwy 54 &amp; 55
+</td>
+<td style="text-align:left;">
+Route goes to S Alston Avenue (#6274), loops around, and departs from stop #1871 straight back to Durham Station, via NCCU. As opposed to Route 12, which interlines with Route 14 (towards Southpoint Mall) during the day.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NHS
+</td>
+<td style="text-align:left;">
+Northern High School Tripper
+</td>
+<td style="text-align:left;">
+Tripper bus, running directly from Northern High School to Durham Station (school days only).
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BCC
+</td>
+<td style="text-align:left;">
+Bull City Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1B
+</td>
+<td style="text-align:left;">
+Northgate - Guess Road - Willowdale
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Northgate-North Pointe-Croasdaile Crossings-Willowdale
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1A
+</td>
+<td style="text-align:left;">
+Northgate-North Pointe-Loehmanns
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+North Roxboro - North Duke Crossing
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+South Square - New Hope Commons
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10A
+</td>
+<td style="text-align:left;">
+South Square - New Hope Commons
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10B
+</td>
+<td style="text-align:left;">
+South Square - Pickett Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+The Village - East Durham Link
+</td>
+<td style="text-align:left;">
+Nighttime / Sunday / Holiday connector service for the Village, East Durham, Hwy 98, and Southern High School. Created from nighttime / Sunday / holiday services of 2B and 16.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+The Village - Glenview Station
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3C
+</td>
+<td style="text-align:left;">
+The Village - Highway 98 - Rummel Street
+</td>
+<td style="text-align:left;">
+Formerly the Route 16B, with service to Ross Road and Junction Road removed. New service to Springwood Park Apartments.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9B
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Ben Franklin Boulevard - Northern HS
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3B
+</td>
+<td style="text-align:left;">
+The Village-Highway 98-Southern High School
+</td>
+<td style="text-align:left;">
+Formerly the 16A, with new routing to Ross Road and Junction Road.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+TW Alexander - Brier Creek
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+Woodcroft - South Square - Duke &amp; VA Limited
+</td>
+<td style="text-align:left;">
+Limited service route, running from Hope Valley Commons Park-and-Ride to Duke / VA Hospitals via South Square.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Foxfire - Riverview
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9A
+</td>
+<td style="text-align:left;">
+Dearborn Drive - Durham Regional - Riverside HS
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+Duke &amp; VA - Hillsborough Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Duke &amp; VA Hospitals-American Village
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6B
+</td>
+<td style="text-align:left;">
+Duke &amp; VA Hospitals-Sparger Rd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+East Durham-Angier Ave
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-3" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-8.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-3" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_780_b_18459_d_64
+</td>
+<td style="text-align:left;">
+Year-round Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_780_b_18459_d_32
+</td>
+<td style="text-align:left;">
+Year-round Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_780_b_18459_d_31
+</td>
+<td style="text-align:left;">
+Year-round Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_780_b_17191_d_64
+</td>
+<td style="text-align:left;">
+Year-round Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_780_b_17191_d_32
+</td>
+<td style="text-align:left;">
+Year-round Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_780_b_17191_d_31
+</td>
+<td style="text-align:left;">
+Year-round Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_2837_b_19495_d_32
+</td>
+<td style="text-align:left;">
+BCC (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_2837_b_19495_d_31
+</td>
+<td style="text-align:left;">
+BCC (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_2837_b_17199_d_32
+</td>
+<td style="text-align:left;">
+BCC (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_2837_b_17199_d_31
+</td>
+<td style="text-align:left;">
+BCC (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17878_b_22189_d_64
+</td>
+<td style="text-align:left;">
+NORMAL ROUTES 2 (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17878_b_22189_d_32
+</td>
+<td style="text-align:left;">
+NORMAL ROUTES 2 (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17878_b_22189_d_31
+</td>
+<td style="text-align:left;">
+NORMAL ROUTES 2 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17877_b_22188_d_64
+</td>
+<td style="text-align:left;">
+DETOUR ROUTES 2 (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17877_b_22188_d_32
+</td>
+<td style="text-align:left;">
+DETOUR ROUTES 2 (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17877_b_22188_d_31
+</td>
+<td style="text-align:left;">
+DETOUR ROUTES 2 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_16089_b_17686_d_31
+</td>
+<td style="text-align:left;">
+CHRISTMAS EVE (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15934_b_17284_d_8
+</td>
+<td style="text-align:left;">
+STATE FAIR - FIRST DAY (Thurday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15933_b_17282_d_64
+</td>
+<td style="text-align:left;">
+STATE FAIR (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15933_b_17282_d_63
+</td>
+<td style="text-align:left;">
+STATE FAIR (No Sunday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15411_b_22414_d_31
+</td>
+<td style="text-align:left;">
+NHS ACADEMIC (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15411_b_21723_d_31
+</td>
+<td style="text-align:left;">
+NHS ACADEMIC (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="goraleigh-gtfs-feed" class="section level2">
+<h2>GoRaleigh GTFS Feed</h2>
+<div id="agency-information-4" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+244
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://goraleigh.org/" class="uri">http://goraleigh.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+GoRaleigh
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+<ol start="919" style="list-style-type: decimal">
+<li>485-RIDE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.raleighnc.gov/services/content/PWksTransit/Articles/BusRates.html" class="uri">http://www.raleighnc.gov/services/content/PWksTransit/Articles/BusRates.html</a>
+</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+<div id="gtfs-feed-information-4" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 06-Sep-2019 21:05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+capital-area-transit-nc-us@trilliumtransit.com" class="email">support+capital-area-transit-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190906
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+capital-area-transit-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-4" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-9.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-4" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Capital Blvd
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Falls of Neuse
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11L
+</td>
+<td style="text-align:left;">
+Buck Jones Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+Method
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+Chavis Heights
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+WakeMed
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15L
+</td>
+<td style="text-align:left;">
+Trawick Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+Oberlin
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+Apollo Heights
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+Caraleigh
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Glascock
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+State Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23L
+</td>
+<td style="text-align:left;">
+Millbrook Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+24L
+</td>
+<td style="text-align:left;">
+North Crosstown Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+25L
+</td>
+<td style="text-align:left;">
+Triangle Town Link
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40X
+</td>
+<td style="text-align:left;">
+Wake Tech Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+55X
+</td>
+<td style="text-align:left;">
+Poole Road Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+70X
+</td>
+<td style="text-align:left;">
+Brier Creek Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R-Line
+</td>
+<td style="text-align:left;">
+Free Downtown Circulator
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WFL
+</td>
+<td style="text-align:left;">
+Wake Forest Loop
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Rex Hospital
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+Rock Quarry
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+Poole-Barwell
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+Edwards Mill
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+Blue Ridge
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:left;">
+Creedmoor
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+18S
+</td>
+<td style="text-align:left;">
+Poole
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+401
+</td>
+<td style="text-align:left;">
+Rolesville
+</td>
+<td style="text-align:left;">
+The new service will connect Rolesville with Triangle Town Center and the Wake Tech Northern Campus, which will provide additional transfer opportunities to both GoRaleigh and GoTriangle routes.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+Garner
+</td>
+<td style="text-align:left;">
+The former express service will now be a local service, with additional stops within Garner. It will connect Garner to the GoRaleigh Downtown Station.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Biltmore Hills
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+33
+</td>
+<td style="text-align:left;">
+Knightdale
+</td>
+<td style="text-align:left;">
+The former express service will now be a local service, with additional stops within Knightdale. The route will connect Knightdale to the New Hope Commons Shopping center for transfer opportunity to multiple routes.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Crabtree
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+South Saunders
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7L
+</td>
+<td style="text-align:left;">
+Carolina Pines Connector
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+Six Forks
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+Longview
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-4" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-10.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-4" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_937_b_19990_d_31
+</td>
+<td style="text-align:left;">
+WTCC Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_937_b_19989_d_31
+</td>
+<td style="text-align:left;">
+WTCC Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_937_b_19988_d_31
+</td>
+<td style="text-align:left;">
+WTCC Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_937_b_19987_d_31
+</td>
+<td style="text-align:left;">
+WTCC Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_936_b_19994_d_31
+</td>
+<td style="text-align:left;">
+WTCC Modified (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_936_b_19993_d_31
+</td>
+<td style="text-align:left;">
+WTCC Modified (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_936_b_19992_d_31
+</td>
+<td style="text-align:left;">
+WTCC Modified (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_936_b_19991_d_31
+</td>
+<td style="text-align:left;">
+WTCC Modified (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_22388_d_7
+</td>
+<td style="text-align:left;">
+Year-round calendar (MTuW)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_22388_d_64
+</td>
+<td style="text-align:left;">
+Year-round calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_22388_d_32
+</td>
+<td style="text-align:left;">
+Year-round calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_22388_d_31
+</td>
+<td style="text-align:left;">
+Year-round calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_22388_d_24
+</td>
+<td style="text-align:left;">
+Year-round calendar (ThF)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_21950_d_7
+</td>
+<td style="text-align:left;">
+Year-round calendar (MTuW)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_21950_d_64
+</td>
+<td style="text-align:left;">
+Year-round calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_21950_d_32
+</td>
+<td style="text-align:left;">
+Year-round calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_21950_d_31
+</td>
+<td style="text-align:left;">
+Year-round calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_21950_d_24
+</td>
+<td style="text-align:left;">
+Year-round calendar (ThF)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_17203_d_7
+</td>
+<td style="text-align:left;">
+Year-round calendar (MTuW)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_17203_d_64
+</td>
+<td style="text-align:left;">
+Year-round calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_17203_d_32
+</td>
+<td style="text-align:left;">
+Year-round calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_17203_d_31
+</td>
+<td style="text-align:left;">
+Year-round calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_783_b_17203_d_24
+</td>
+<td style="text-align:left;">
+Year-round calendar (ThF)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17852_b_22106_d_31
+</td>
+<td style="text-align:left;">
+STARTING - 13OCT2019 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15942_b_17300_d_96
+</td>
+<td style="text-align:left;">
+STATE FAIR (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15942_b_17300_d_31
+</td>
+<td style="text-align:left;">
+STATE FAIR (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15942_b_17300_d_24
+</td>
+<td style="text-align:left;">
+STATE FAIR (ThF)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="gotriangle-gtfs-feed" class="section level2">
+<h2>GoTriangle GTFS Feed</h2>
+<div id="agency-information-5" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+238
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.gotriangle.org/" class="uri">http://www.gotriangle.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+GoTriangle
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+<ol start="919" style="list-style-type: decimal">
+<li>485-RIDE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.gotriangle.org/fares-and-passes" class="uri">http://www.gotriangle.org/fares-and-passes</a>
+</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+<div id="gtfs-feed-information-5" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 06-Sep-2019 21:02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+tta-regionalbus-nc-us@trilliumtransit.com" class="email">support+tta-regionalbus-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190906
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+tta-regionalbus-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-5" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-11.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-5" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+311
+</td>
+<td style="text-align:left;">
+Apex-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+700
+</td>
+<td style="text-align:left;">
+Durham-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FRX
+</td>
+<td style="text-align:left;">
+Fuquay-Varina - Raleigh Express (operated by GoRaleigh)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+420
+</td>
+<td style="text-align:left;">
+Hillsborough-Chapel Hill (operated by Chapel Hill Transit)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HC
+</td>
+<td style="text-align:left;">
+Hillsborough Circulator (Orange Public Transportation)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+KRX
+</td>
+<td style="text-align:left;">
+Knightdale-Raleigh Express (operated by GoRaleigh)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+305
+</td>
+<td style="text-align:left;">
+Lake Pine-Cary-Raleigh
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OCH
+</td>
+<td style="text-align:left;">
+Orange - Chapel Hill Connector - 420 Midday (Orange Public Transportation)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ODX
+</td>
+<td style="text-align:left;">
+Orange-Durham Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+301
+</td>
+<td style="text-align:left;">
+Cary-Raleigh
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+100
+</td>
+<td style="text-align:left;">
+Raleigh-RDU Airport-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+102
+</td>
+<td style="text-align:left;">
+Raleigh-Garner (operated by GoRaleigh)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+105
+</td>
+<td style="text-align:left;">
+Raleigh-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+300
+</td>
+<td style="text-align:left;">
+Regional Transit Center-Cary-Raleigh
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+800S
+</td>
+<td style="text-align:left;">
+Southpoint-Chapel Hill
+</td>
+<td style="text-align:left;">
+Patterns from the Route 800 that begin or end at Southpoint Mall.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CRX
+</td>
+<td style="text-align:left;">
+Chapel Hill-Raleigh Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WRX
+</td>
+<td style="text-align:left;">
+Wake Forest-Raleigh Express (operated by GoRaleigh)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ZWX
+</td>
+<td style="text-align:left;">
+Zebulon-Wendell-Raleigh Express (operated by GoRaleigh)
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NRX
+</td>
+<td style="text-align:left;">
+North Raleigh Express
+</td>
+<td style="text-align:left;">
+New express route to North Raleigh, 04 August 2019.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+310
+</td>
+<td style="text-align:left;">
+Perimeter Park-Wake Tech RTP
+</td>
+<td style="text-align:left;">
+New route for August 2019, serving Wake Tech RTP campus.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+800
+</td>
+<td style="text-align:left;">
+Chapel Hill-Southpoint-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+805
+</td>
+<td style="text-align:left;">
+Chapel Hill-Woodcroft-Regional Transit Center
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+400
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+405
+</td>
+<td style="text-align:left;">
+Durham-Chapel Hill-Carrboro
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DRX
+</td>
+<td style="text-align:left;">
+Durham-Raleigh Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-5" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-12.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-5" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_799_b_22383_d_64
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_22383_d_32
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_22383_d_31
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_22382_d_64
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_22382_d_32
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_22382_d_31
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_17183_d_64
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_17183_d_32
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_799_b_17183_d_31
+</td>
+<td style="text-align:left;">
+Year-round Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3198_b_22387_d_31
+</td>
+<td style="text-align:left;">
+OPT (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3198_b_22386_d_31
+</td>
+<td style="text-align:left;">
+OPT (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3198_b_19829_d_31
+</td>
+<td style="text-align:left;">
+OPT (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_17556_b_21550_d_31
+</td>
+<td style="text-align:left;">
+102 &amp; KRX END - 07SEPT2019 (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15945_b_17344_d_64
+</td>
+<td style="text-align:left;">
+STATE FAIR (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15945_b_17344_d_32
+</td>
+<td style="text-align:left;">
+STATE FAIR (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_22385_d_64
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_22385_d_32
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_22384_d_64
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_22384_d_32
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_17186_d_64
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_15271_b_17186_d_32
+</td>
+<td style="text-align:left;">
+RT 300 WKNDS (Saturday only)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="ncsu-wolfline-gtfs-feed" class="section level2">
+<h2>NCSU Wolfline GTFS Feed</h2>
+<div id="agency-information-6" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+239
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.ncsu.edu/wolfline" class="uri">http://www.ncsu.edu/wolfline</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+NCSU Wolfline
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information-6" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.trilliumtransit.com" class="uri">http://www.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Trillium Solutions, Inc. 
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+UTC: 26-Aug-2019 15:52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_license
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:support+ncsu-wolfline-nc-us@trilliumtransit.com" class="email">support+ncsu-wolfline-nc-us@trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+<a href="http://support.trilliumtransit.com" class="uri">http://support.trilliumtransit.com</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20190826
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20191031
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_id
+</td>
+<td style="text-align:left;">
+ncsu-wolfline-nc-us
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-6" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-13.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-6" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Avent Ferry
+</td>
+<td style="text-align:left;">
+Serving Avent Ferry and Greek Way
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+Night Wolf
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+Southeast Loop
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+Varsity
+</td>
+<td style="text-align:left;">
+Main Campus Circulators
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+Village Link
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+Wolflink Shuttle
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+Full Moon
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Spring Hill
+</td>
+<td style="text-align:left;">
+Serving Spring Hill Park &amp; Ride
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+Centennial Express
+</td>
+<td style="text-align:left;">
+Serving Carmichael Gym, Dunn/Jeter &amp; Centennial Campus
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Carter Finley
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+Centennial
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+Centennial Night
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Engineering
+</td>
+<td style="text-align:left;">
+Connecting Centennial Campus and Main Campus
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+Gorman Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7R
+</td>
+<td style="text-align:left;">
+Wolflink Reverse
+</td>
+<td style="text-align:left;">
+Main campus circulator that runs opposite of Route 7 Wolflink Shuttle. Established Fall 2017.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6S
+</td>
+<td style="text-align:left;">
+Hillsborough Street West
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+RS Lot Shuttle
+</td>
+<td style="text-align:left;">
+RS Lot Shuttle connects Centennial Storage Parking Lots to campus residence halls. It operates 8:00 p.m. - Midnight every Sunday, and on evenings prior to classes resuming after holiday breaks.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9S
+</td>
+<td style="text-align:left;">
+Gorman Street
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+Werewolf Shuttle
+</td>
+<td style="text-align:left;">
+Wolfline Night Service
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-6" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-14.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-6" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+service_id
+</th>
+<th style="text-align:left;">
+service_description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+c_940_b_21989_d_96
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_21989_d_64
+</td>
+<td style="text-align:left;">
+Academic Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_21989_d_31
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_21985_d_96
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_21985_d_64
+</td>
+<td style="text-align:left;">
+Academic Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_21985_d_31
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19752_d_96
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19752_d_64
+</td>
+<td style="text-align:left;">
+Academic Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19752_d_31
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19751_d_96
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19751_d_64
+</td>
+<td style="text-align:left;">
+Academic Calendar (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_940_b_19751_d_31
+</td>
+<td style="text-align:left;">
+Academic Calendar (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21990_d_96
+</td>
+<td style="text-align:left;">
+Night Service (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21990_d_64
+</td>
+<td style="text-align:left;">
+Night Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21990_d_32
+</td>
+<td style="text-align:left;">
+Night Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21990_d_31
+</td>
+<td style="text-align:left;">
+Night Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21984_d_96
+</td>
+<td style="text-align:left;">
+Night Service (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21984_d_64
+</td>
+<td style="text-align:left;">
+Night Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21984_d_32
+</td>
+<td style="text-align:left;">
+Night Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_21984_d_31
+</td>
+<td style="text-align:left;">
+Night Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19754_d_96
+</td>
+<td style="text-align:left;">
+Night Service (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19754_d_64
+</td>
+<td style="text-align:left;">
+Night Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19754_d_32
+</td>
+<td style="text-align:left;">
+Night Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19754_d_31
+</td>
+<td style="text-align:left;">
+Night Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19753_d_96
+</td>
+<td style="text-align:left;">
+Night Service (Weekend)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19753_d_64
+</td>
+<td style="text-align:left;">
+Night Service (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19753_d_32
+</td>
+<td style="text-align:left;">
+Night Service (Saturday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_3119_b_19753_d_31
+</td>
+<td style="text-align:left;">
+Night Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1941_b_21981_d_31
+</td>
+<td style="text-align:left;">
+Limited Faculty/Staff Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1941_b_21980_d_31
+</td>
+<td style="text-align:left;">
+Limited Faculty/Staff Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1941_b_21979_d_31
+</td>
+<td style="text-align:left;">
+Limited Faculty/Staff Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1941_b_21978_d_31
+</td>
+<td style="text-align:left;">
+Limited Faculty/Staff Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1941_b_21977_d_31
+</td>
+<td style="text-align:left;">
+Limited Faculty/Staff Service (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21991_d_64
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21991_d_31
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21988_d_64
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21988_d_31
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21987_d_64
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21987_d_31
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Weekday)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21986_d_64
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Sunday only)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+c_1696_b_21986_d_31
+</td>
+<td style="text-align:left;">
+Holiday Shuttle (Weekday)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="piedmont-authority-for-regional-transportation-gtfs-feed" class="section level2">
+<h2>Piedmont Authority for Regional Transportation GTFS Feed</h2>
+<div id="agency-information-7" class="section level3">
+<h3>Agency Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+agency_id
+</td>
+<td style="text-align:left;">
+PART
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_name
+</td>
+<td style="text-align:left;">
+Piedmont Authority for Regional Transportation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.partnc.org/" class="uri">http://www.partnc.org/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_timezone
+</td>
+<td style="text-align:left;">
+America/New_York
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_phone
+</td>
+<td style="text-align:left;">
+1-336-883-7278
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_fare_url
+</td>
+<td style="text-align:left;">
+<a href="https://www.partnc.org/101/Fares-Passes" class="uri">https://www.partnc.org/101/Fares-Passes</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+agency_email
+</td>
+<td style="text-align:left;">
+<a href="mailto:contactus@partnc.org" class="email">contactus@partnc.org</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gtfs-feed-information-7" class="section level3">
+<h3>GTFS Feed Information</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+attribute
+</th>
+<th style="text-align:left;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+feed_publisher_name
+</td>
+<td style="text-align:left;">
+Piedmont Authority for Regional Transportation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_publisher_url
+</td>
+<td style="text-align:left;">
+<a href="http://www.partnc.org/part-gtfs-exchange/" class="uri">http://www.partnc.org/part-gtfs-exchange/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_lang
+</td>
+<td style="text-align:left;">
+en
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_start_date
+</td>
+<td style="text-align:left;">
+20200702
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_end_date
+</td>
+<td style="text-align:left;">
+20201231
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_version
+</td>
+<td style="text-align:left;">
+7/6/2020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_email
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+feed_contact_url
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="system-map-7" class="section level3">
+<h3>System Map</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-15.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="route-table-7" class="section level3">
+<h3>Route Table</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+route_short_name
+</th>
+<th style="text-align:left;">
+route_long_name
+</th>
+<th style="text-align:left;">
+route_desc
+</th>
+<th style="text-align:right;">
+route_type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+Chimney Rock
+</td>
+<td style="text-align:left;">
+NE
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+Sandy Ridge
+</td>
+<td style="text-align:left;">
+SW
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+High Point Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Greensboro Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+Pleasant Ridge
+</td>
+<td style="text-align:left;">
+NW
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+Piedmont Parkway
+</td>
+<td style="text-align:left;">
+SE
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+Airport Area
+</td>
+<td style="text-align:left;">
+GSO
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+Surry County Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+Kernersville Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Winston-Salem Express
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-pattern-analysis-7" class="section level3">
+<h3>Service Pattern Analysis</h3>
+<img src="schedule_analysis_files/figure-html/unnamed-chunk-1-16.png" width="100%" />
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="service-id-descriptions-7" class="section level3">
+<h3>Service ID Descriptions</h3>
+<table class="table table-striped" style="width: auto !important; ">
+<tbody>
+<tr>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
