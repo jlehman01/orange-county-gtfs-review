@@ -21,9 +21,9 @@ navbar:
       href: schedule_analysis.html
     - text: "Feed Validation"
       href: validation.html
-    - text: "Frequency Analysis"
+    - text: "Frequency"
       href: frequency_analysis.html
-    - text: "Speed Analysis"
+    - text: "Speed"
       href: service_speed_analysis.html
     - text: "Travel Time"
       href: transit-travel-time-analysis.html
