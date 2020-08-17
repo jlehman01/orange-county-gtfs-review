@@ -1,0 +1,134 @@
+---
+title: "Transit Travel Time Analysis"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, cache=T}
+
+library(sf)
+library(dplyr)
+library(kableExtra)
+library(tmap)
+library(rpgcolorsr)
+library(rmapshaper)
+library(stringr)
+tmap_mode("view")
+
+```
+
+# Blue Hill 
+
+```{r blue hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
+
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\BlueHillDistrict_ServiceArea_90min.shp", quiet = TRUE) %>% 
+  st_transform(2264) %>% 
+  ms_simplify() %>% 
+  mutate(category = paste0(FromBreak, " - ", ToBreak))
+
+point <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\BlueHillDistrict_ServiceArea_point.shp", quiet = TRUE) %>% select(Name)
+
+cats <- n_distinct(tt_contour$category)
+
+pal <- rpg_color_pal("rpg_colors")(cats)
+
+  tm_shape(tt_contour) +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(point) +
+  tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
+  tm_basemap ("CartoDB.Voyager")
+  
+```
+
+# Carraway
+
+```{r carraweay, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
+
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carraway_ServiceArea_90min.shp", quiet = TRUE) %>% 
+  st_transform(2264) %>% 
+  ms_simplify() %>% 
+  mutate(category = paste0(FromBreak, " - ", ToBreak))
+
+point <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carraway_ServiceArea_point.shp", quiet = TRUE) %>% select(Name)
+
+cats <- n_distinct(tt_contour$category)
+
+pal <- rpg_color_pal("rpg_colors")(cats)
+
+  tm_shape(tt_contour) +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(point) +
+  tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
+  tm_basemap ("CartoDB.Voyager")
+  
+```
+
+
+# Carrboro
+
+```{r carrboro, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
+
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carrboro_ServiceArea_90min.shp", quiet = TRUE) %>% 
+  st_transform(2264) %>% 
+  ms_simplify() %>% 
+  mutate(category = paste0(FromBreak, " - ", ToBreak))
+
+point <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carrboro_ServiceArea_point.shp", quiet = TRUE) %>% select(Name)
+
+cats <- n_distinct(tt_contour$category)
+pal <- rpg_color_pal("rpg_colors")(cats)
+
+  tm_shape(tt_contour) +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(point) +
+  tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
+  tm_basemap ("CartoDB.Voyager")
+  
+```
+
+# Chapel Hill
+
+```{r chapel hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
+
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\ChapelHill_ServiceArea_90min.shp", quiet = TRUE) %>% 
+  st_transform(2264) %>% 
+  ms_simplify() %>% 
+  mutate(category = paste0(FromBreak, " - ", ToBreak))
+
+point <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\ChapelHill_ServiceArea_point.shp", quiet = TRUE) %>% select(Name)
+
+cats <- n_distinct(tt_contour$category)
+
+pal <- rpg_color_pal("rpg_colors")(cats)
+
+  tm_shape(tt_contour) +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(point) +
+  tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
+  tm_basemap ("CartoDB.Voyager")
+  
+```
+
+# Hillsborough
+
+```{r hillsborough, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
+
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Hillsborough_Service_Area_90min.shp", quiet = TRUE) %>% 
+  st_transform(2264) %>% 
+  ms_simplify() %>% 
+  mutate(category = paste0(FromBreak, " - ", ToBreak))
+
+point <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Hillsborough_Service_Area_point.shp", quiet = TRUE) %>% select(Name)
+
+cats <- n_distinct(tt_contour$category)
+
+pal <- rpg_color_pal("rpg_colors")(cats)
+
+  tm_shape(tt_contour) +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(point) +
+  tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
+  tm_basemap ("CartoDB.Voyager")
+  
+```
+

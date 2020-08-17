@@ -17,7 +17,7 @@ navbar:
       href: index.html
     - text: "Findings"
       href: findings.html    
-    - text: "Routes & Schedule Analysis"
+    - text: "Schedule Analysis"
       href: schedule_analysis.html
     - text: "Feed Validation"
       href: validation.html
@@ -25,3 +25,5 @@ navbar:
       href: frequency_analysis.html
     - text: "Speed Analysis"
       href: service_speed_analysis.html
+    - text: "Travel Time"
+      href: transit-travel-time-analysis.html
