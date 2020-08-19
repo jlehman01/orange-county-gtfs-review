@@ -21,7 +21,7 @@ tmap_mode("view")
 
 ```{r blue hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
 
-tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\BlueHillDistrict_ServiceArea_90min.shp", quiet = TRUE) %>% 
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\BlueHillDistrict_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
   mutate(category = paste0(FromBreak, " - ", ToBreak))
@@ -44,7 +44,7 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
 ```{r carraweay, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
 
-tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carraway_ServiceArea_90min.shp", quiet = TRUE) %>% 
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carraway_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
   mutate(category = paste0(FromBreak, " - ", ToBreak))
@@ -68,7 +68,7 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
 ```{r carrboro, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
 
-tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carrboro_ServiceArea_90min.shp", quiet = TRUE) %>% 
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carrboro_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
   mutate(category = paste0(FromBreak, " - ", ToBreak))
@@ -90,7 +90,7 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
 ```{r chapel hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
 
-tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\ChapelHill_ServiceArea_90min.shp", quiet = TRUE) %>% 
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\ChapelHill_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
   mutate(category = paste0(FromBreak, " - ", ToBreak))
@@ -113,7 +113,7 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
 ```{r hillsborough, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
 
-tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Hillsborough_Service_Area_90min.shp", quiet = TRUE) %>% 
+tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Hillsborough_Service_Area_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
   mutate(category = paste0(FromBreak, " - ", ToBreak))
