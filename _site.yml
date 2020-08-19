@@ -15,9 +15,9 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Findings"
+    - text: "GTFS Recommendations"
       href: findings.html    
-    - text: "Schedule Analysis"
+    - text: "Schedule"
       href: schedule_analysis.html
     - text: "Feed Validation"
       href: validation.html
@@ -25,5 +25,5 @@ navbar:
       href: frequency_analysis.html
     - text: "Speed"
       href: service_speed_analysis.html
-    - text: "Travel Time"
+    - text: "Travel Time QA/QC"
       href: transit-travel-time-analysis.html
