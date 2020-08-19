@@ -18,7 +18,7 @@ tmap_mode("view")
 
 ```
 
-After changes were implemented in GTFS feed as suggested in the GTFS Recommendations section of this report, transit networks were built using the GTFS feeds and the OSM walk network. Transit travel time contours were developed for five locations throughout the region, representing travel time from one point to areas accessible by up to 90 minutes by any combination of walking and transit travel time.
+After changes were implemented in GTFS feed as suggested in the GTFS Recommendations section of this report, transit networks were built using the GTFS feeds and a street network that represents pedestrian accessible links throughout the region. Using these inputs, transit travel time contours were developed for five locations throughout the region. These contours represent travel time from each illustrated point to areas accessible by up to 90 minutes by any combination of walking and transit travel time. Service areas were calculated based on Wednesday service, departing at 8:00 AM.
 
 ```{r read in all transit feeds and create shape, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 #read in GTFS feed from local file
