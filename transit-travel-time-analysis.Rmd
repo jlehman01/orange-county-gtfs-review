@@ -13,14 +13,53 @@ library(tmap)
 library(rpgcolorsr)
 library(rmapshaper)
 library(stringr)
+library(rmapshaper)
 tmap_mode("view")
 
 ```
 
+
+```{r read in all transit feeds and create shape, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+#read in GTFS feed from local file
+
+gtfs_feeds <- list.files(path = "K:\\Projects\\OrangeCoNC\\Features\\Transp\\GTFS", pattern="*.zip")
+
+gtfs_table <- gtfs_feeds %>% str_remove(".zip") %>% str_replace_all("_", " ")
+
+combined_shapes <- list()
+
+for(i in 1:length(gtfs_feeds)){
+  
+  local_gtfs_path <- paste0("K:\\Projects\\OrangeCoNC\\Features\\Transp\\GTFS\\", gtfs_feeds[i])
+  
+  local_gtfs_name <- gtfs_feeds[i] %>% 
+    str_remove(".zip")
+  
+  tt_feed <- tidytransit::read_gtfs(local_gtfs_path)
+  
+  tt_sf <- gtfs_as_sf(tt_feed)
+  
+  temp_shape <- tt_sf$shapes
+  
+  temp_shape$name <- gtfs_table[i]
+  
+  combined_shapes[[i]] <- temp_shape
+  
+}
+
+combined_shapes <-  do.call(rbind, combined_shapes)
+
+combined_shapes_simp <- ms_simplify(combined_shapes)
+
+
+
+```
+
+
 # Blue Hill 
 
 ```{r blue hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
-
+tmap_mode("view")
 tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\BlueHillDistrict_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
@@ -34,16 +73,21 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
   tm_shape(tt_contour) +
   tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_shape(combined_shapes_simp) +
+  tm_lines(lwd = 0.25, col = "#8400a8", alpha = 0.25) +
   tm_shape(point) +
   tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
-  tm_basemap ("CartoDB.Voyager")
+      tm_text("Name", just = "bottom", alpha = 0.8) +
+  tm_basemap ("Esri.WorldGrayCanvas")
+ 
   
+
 ```
 
 # Carraway
 
 ```{r carraweay, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
-
+tmap_mode("view")
 tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carraway_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
@@ -56,10 +100,13 @@ cats <- n_distinct(tt_contour$category)
 pal <- rpg_color_pal("rpg_colors")(cats)
 
   tm_shape(tt_contour) +
-  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+  tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category")  +
+  tm_shape(combined_shapes_simp) +
+  tm_lines(lwd = 0.25, col = "#8400a8", alpha = 0.25) +
   tm_shape(point) +
   tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
-  tm_basemap ("CartoDB.Voyager")
+      tm_text("Name", just = "bottom", alpha = 0.8) +
+  tm_basemap ("Esri.WorldGrayCanvas")
   
 ```
 
@@ -67,7 +114,7 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 # Carrboro
 
 ```{r carrboro, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
-
+tmap_mode("view")
 tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Carrboro_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
@@ -80,16 +127,19 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
   tm_shape(tt_contour) +
   tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+      tm_shape(combined_shapes_simp) +
+  tm_lines(lwd = 0.25, col = "#8400a8", alpha = 0.25) +
   tm_shape(point) +
   tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
-  tm_basemap ("CartoDB.Voyager")
+  tm_text("Name", just = "bottom", alpha = 0.8) +
+  tm_basemap ("Esri.WorldGrayCanvas")
   
 ```
 
 # Chapel Hill
 
 ```{r chapel hill, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
-
+tmap_mode("view")
 tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\ChapelHill_ServiceArea_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
@@ -103,16 +153,19 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
   tm_shape(tt_contour) +
   tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+      tm_shape(combined_shapes_simp) +
+  tm_lines(lwd = 0.25, col = "#8400a8", alpha = 0.25) +
   tm_shape(point) +
   tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
-  tm_basemap ("CartoDB.Voyager")
+      tm_text("Name", just = "bottom", alpha = 0.8) +
+  tm_basemap ("Esri.WorldGrayCanvas")
   
 ```
 
 # Hillsborough
 
 ```{r hillsborough, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, cache=TRUE, out.width = "100%"}
-
+tmap_mode("view")
 tt_contour <- st_read("K:\\Projects\\OrangeCoNC\\Features\\Transp\\Network_Skims\\ServiceAreaAnalysis\\Hillsborough_Service_Area_90min_v3.shp", quiet = TRUE) %>% 
   st_transform(2264) %>% 
   ms_simplify() %>% 
@@ -126,9 +179,12 @@ pal <- rpg_color_pal("rpg_colors")(cats)
 
   tm_shape(tt_contour) +
   tm_polygons("ToBreak", title = "Transit Travel Time (min)", n = cats, palette = pal, lwd = 0, alpha = .5, id = "category") +
+      tm_shape(combined_shapes_simp) +
+  tm_lines(lwd = 0.25, col = "#8400a8", alpha = 0.25) +
   tm_shape(point) +
   tm_dots(col = "#8400a8", size = 0.1, id = "Name") +
-  tm_basemap ("CartoDB.Voyager")
+      tm_text("Name", just = "bottom", alpha = 0.8) +
+  tm_basemap ("Esri.WorldGrayCanvas")
   
 ```
 
