@@ -51,4 +51,5 @@ findings.Rmd
 _site.yml
 build_site.R
 /rosm.cache/
+/rosm.cache
 /docs/rosm.cache/
